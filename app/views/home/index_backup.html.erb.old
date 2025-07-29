@@ -1,0 +1,578 @@
+<%# 특허 번역 서비스 랜딩페이지 - PatentTranslator Pro %>
+<%# 디자인: 따뜻하고 전문적인 Optikka 스타일 %>
+<%# 색상: 베이지 배경 + 코랄 오렌지 포인트 %>
+<%# 반응형: 모바일 우선 설계 %>
+
+<% content_for :title, "PatentTranslator Pro - AI 멀티 에이전트 특허 번역 서비스" %>
+
+<%# 커스텀 스타일 추가 %>
+<% content_for :head do %>
+  <style>
+    body {
+      background-color: #F5F3F0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .warm-bg {
+      background-color: #F5F3F0;
+    }
+    .card-warm {
+      background: #FFFFFF;
+      box-shadow: 0 8px 32px rgba(45, 42, 38, 0.08);
+      border: 1px solid rgba(45, 42, 38, 0.05);
+    }
+    .text-primary {
+      color: #2D2A26;
+    }
+    .text-secondary {
+      color: #5A5651;
+    }
+    .text-accent {
+      color: #E85A4F;
+    }
+    .bg-accent {
+      background-color: #E85A4F;
+    }
+    .bg-accent:hover {
+      background-color: #D4493E;
+    }
+    .border-accent {
+      border-color: #E85A4F;
+    }
+    .geometric-pattern {
+      background-image: radial-gradient(circle at 1px 1px, rgba(45, 42, 38, 0.03) 1px, transparent 0);
+      background-size: 20px 20px;
+    }
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(45, 42, 38, 0.12);
+    }
+    .logo-shape {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #E85A4F 0%, #D4A574 100%);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    }
+  </style>
+<% end %>
+
+<div class="warm-bg min-h-screen">
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center space-x-3">
+          <div class="logo-shape"></div>
+          <span class="text-xl font-bold text-primary">PatentTranslator</span>
+        </div>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#features" class="text-secondary hover:text-accent transition-colors">서비스</a>
+          <a href="#process" class="text-secondary hover:text-accent transition-colors">프로세스</a>
+          <a href="#pricing" class="text-secondary hover:text-accent transition-colors">가격</a>
+          <button class="bg-accent hover:bg-accent text-white px-6 py-2 rounded-lg font-medium transition-colors">
+            시작하기
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+<!-- Hero Section -->
+<section class="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white min-h-screen flex items-center">
+  <div class="container mx-auto px-4 py-16">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <!-- Hero Content -->
+      <div class="text-center lg:text-left">
+        <!-- Main Headline -->
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          🤖 <span class="text-yellow-400">AI 멀티 에이전트</span>가<br>
+          특허를 <span class="text-yellow-400">완벽하게</span> 번역합니다
+        </h1>
+        
+        <!-- Sub Headline -->
+        <p class="text-xl md:text-2xl mb-8 text-blue-100 leading-relaxed">
+          "<%= @stats[:accuracy_rate] %> 정확도의 전문 번역으로<br>
+          당신의 아이디어를 보호하세요"
+        </p>
+        
+        <!-- Key Stats -->
+        <div class="flex flex-wrap justify-center lg:justify-start gap-6 mb-8">
+          <div class="text-center">
+            <div class="text-2xl font-bold text-yellow-400"><%= @stats[:translation_count] %></div>
+            <div class="text-sm text-blue-200">번역 완료</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-yellow-400"><%= @stats[:customer_satisfaction] %></div>
+            <div class="text-sm text-blue-200">고객 만족도</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-yellow-400"><%= @stats[:processing_time_reduction] %></div>
+            <div class="text-sm text-blue-200">시간 단축</div>
+          </div>
+        </div>
+        
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <a href="#demo" class="bg-yellow-500 hover:bg-yellow-400 text-blue-900 font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+            🚀 무료 체험하기
+          </a>
+          <a href="#process" class="border-2 border-white hover:bg-white hover:text-blue-900 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300">
+            📖 서비스 둘러보기
+          </a>
+        </div>
+      </div>
+      
+      <!-- Hero Illustration -->
+      <div class="text-center">
+        <div class="bg-white/10 rounded-2xl p-8 backdrop-blur-sm">
+          <!-- AI 번역 시각화 -->
+          <div class="text-6xl mb-4">🤖</div>
+          <div class="text-2xl mb-4">AI 멀티 에이전트</div>
+          <div class="flex justify-center items-center space-x-2 mb-4">
+            <div class="w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
+            <div class="w-3 h-3 bg-yellow-400 rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
+            <div class="w-3 h-3 bg-yellow-400 rounded-full animate-pulse" style="animation-delay: 0.4s"></div>
+          </div>
+          <div class="text-lg text-blue-100">실시간 번역 중...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Value Proposition Section -->
+<section id="features" class="py-20 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">
+        왜 <span class="text-blue-600">PatentTranslator Pro</span>를 선택해야 할까요?
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        첨단 AI 기술과 전문 지식이 결합된 혁신적인 특허 번역 솔루션
+      </p>
+    </div>
+    
+    <!-- Features Grid -->
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Feature 1: 멀티 에이전트 -->
+      <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+        <div class="text-5xl mb-6 text-center">🎯</div>
+        <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">멀티 에이전트 시스템</h3>
+        <p class="text-gray-600 text-center leading-relaxed">
+          각 전문 분야별 특화 AI가 동시 작업하여 완벽한 번역 품질을 보장합니다.
+          <strong class="text-blue-600">바이오, IT, 기계, 화학</strong> 분야별 전문 에이전트가 
+          하나하나의 단어를 정밀 분석합니다.
+        </p>
+      </div>
+      
+      <!-- Feature 2: 군사급 보안 -->
+      <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+        <div class="text-5xl mb-6 text-center">🔒</div>
+        <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center"><%= @stats[:security_level] %> 보안</h3>
+        <p class="text-gray-600 text-center leading-relaxed">
+          <strong class="text-blue-600">종단간 암호화(E2E)</strong>와 
+          <strong class="text-blue-600">ISO 27001 인증</strong> 수준의 보안 인프라로 
+          특허 정보를 완벽하게 보호합니다. 번역 완료 후 자동 데이터 삭제.
+        </p>
+      </div>
+      
+      <!-- Feature 3: 전문 용어집 -->
+      <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+        <div class="text-5xl mb-6 text-center">📚</div>
+        <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center"><%= @stats[:glossary_terms] %> 전문 용어집</h3>
+        <p class="text-gray-600 text-center leading-relaxed">
+          실시간 업데이트되는 최신 기술 용어 데이터베이스. 
+          <strong class="text-blue-600">분야별 특화 용어집</strong>과 
+          <strong class="text-blue-600">사용자 맞춤형 용어집</strong> 구축으로 
+          일관성 있는 번역을 제공합니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Process Section -->
+<section id="process" class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">
+        <span class="text-blue-600">7단계</span> 정밀 번역 프로세스
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        체계적이고 과학적인 번역 과정으로 최고 품질을 보장합니다
+      </p>
+    </div>
+    
+    <!-- Process Steps -->
+    <div class="max-w-4xl mx-auto">
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
+        <!-- Step 1-3 -->
+        <div class="text-center">
+          <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">1️⃣</span>
+          </div>
+          <h4 class="font-bold text-lg mb-2">AI 1차 번역</h4>
+          <p class="text-gray-600 text-sm">멀티 에이전트 동시 번역</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">2️⃣</span>
+          </div>
+          <h4 class="font-bold text-lg mb-2">전문가 검토</h4>
+          <p class="text-gray-600 text-sm">분야별 전문가 리뷰</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">3️⃣</span>
+          </div>
+          <h4 class="font-bold text-lg mb-2">용어 통일</h4>
+          <p class="text-gray-600 text-sm">전문 용어집 기반 통일</p>
+        </div>
+      </div>
+      
+      <!-- Arrow Down -->
+      <div class="text-center mb-8">
+        <div class="text-3xl text-blue-600">⬇️</div>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
+        <!-- Step 4-6 -->
+        <div class="text-center">
+          <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">4️⃣</span>
+          </div>
+          <h4 class="font-bold text-lg mb-2">문맥 최적화</h4>
+          <p class="text-gray-600 text-sm">문맥에 맞는 번역 조정</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">5️⃣</span>
+          </div>
+          <h4 class="font-bold text-lg mb-2">법적 검토</h4>
+          <p class="text-gray-600 text-sm">특허법 전문가 검토</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">6️⃣</span>
+          </div>
+          <h4 class="font-bold text-lg mb-2">최종 검수</h4>
+          <p class="text-gray-600 text-sm">품질 관리팀 최종 점검</p>
+        </div>
+      </div>
+      
+      <!-- Arrow Down -->
+      <div class="text-center mb-8">
+        <div class="text-3xl text-green-600">⬇️</div>
+      </div>
+      
+      <!-- Final Step -->
+      <div class="text-center">
+        <div class="bg-yellow-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+          <span class="text-3xl">7️⃣</span>
+        </div>
+        <h4 class="font-bold text-2xl mb-2 text-yellow-600">품질 보증 완료</h4>
+        <p class="text-gray-600">최고 품질의 번역 결과물 제공</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Demo Section -->
+<section id="demo" class="py-20 bg-gradient-to-r from-blue-50 to-indigo-50">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">
+        🚀 <span class="text-blue-600">실시간 번역</span> 체험해보기
+      </h2>
+      <p class="text-xl text-gray-600">
+        간단한 특허 용어를 입력하고 AI 번역을 체험해보세요
+      </p>
+    </div>
+    
+    <!-- Demo Interface -->
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-white rounded-2xl shadow-xl p-8">
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Input Section -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">원문 입력</label>
+            <textarea 
+              id="demo-input" 
+              class="w-full h-32 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+              placeholder="특허 문서의 일부를 입력해보세요...&#10;예: 특허 출원, 발명의 명칭, 기술분야"
+            ></textarea>
+          </div>
+          
+          <!-- Output Section -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">번역 결과</label>
+            <div 
+              id="demo-output" 
+              class="w-full h-32 p-4 bg-gray-50 border border-gray-300 rounded-lg text-gray-500"
+            >
+              번역 결과가 여기에 표시됩니다...
+            </div>
+          </div>
+        </div>
+        
+        <!-- Demo Button -->
+        <div class="text-center mt-6">
+          <button 
+            id="demo-translate-btn"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition-all duration-300 transform hover:scale-105"
+          >
+            ⚡ 번역하기
+          </button>
+        </div>
+        
+        <!-- Demo Notice -->
+        <div class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+          <p class="text-sm text-yellow-800 text-center">
+            💡 <strong>실제 번역은 회원가입 후 이용 가능합니다.</strong> 
+            이 데모는 서비스 체험을 위한 간단한 예시입니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">
+        고객 만족도 <span class="text-blue-600"><%= @stats[:customer_satisfaction] %></span>
+      </h2>
+      <p class="text-xl text-gray-600">
+        전국의 특허 전문가들이 인정한 번역 품질
+      </p>
+    </div>
+    
+    <!-- Testimonials Grid -->
+    <div class="grid md:grid-cols-3 gap-8">
+      <% @testimonials.each do |testimonial| %>
+        <div class="bg-gray-50 rounded-xl p-6 shadow-lg">
+          <!-- Rating Stars -->
+          <div class="flex justify-center mb-4">
+            <% testimonial[:rating].times do %>
+              <span class="text-yellow-400 text-xl">⭐</span>
+            <% end %>
+          </div>
+          
+          <!-- Comment -->
+          <blockquote class="text-gray-600 text-center mb-4 italic">
+            "<%= testimonial[:comment] %>"
+          </blockquote>
+          
+          <!-- Author -->
+          <div class="text-center">
+            <div class="font-bold text-gray-800"><%= testimonial[:name] %></div>
+            <div class="text-sm text-gray-500"><%= testimonial[:company] %></div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing Section -->
+<section id="pricing" class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">
+        <span class="text-blue-600">요금제</span> 선택
+      </h2>
+      <p class="text-xl text-gray-600">
+        필요에 맞는 최적의 플랜을 선택하세요
+      </p>
+    </div>
+    
+    <!-- Pricing Cards -->
+    <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      <% @pricing_plans.each do |plan| %>
+        <div class="bg-white rounded-2xl shadow-xl p-8 relative <%= 'ring-4 ring-blue-500 transform scale-105' if plan[:popular] %>">
+          <!-- Popular Badge -->
+          <% if plan[:popular] %>
+            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+              <span class="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-bold">인기</span>
+            </div>
+          <% end %>
+          
+          <!-- Plan Header -->
+          <div class="text-center mb-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2"><%= plan[:name] %></h3>
+            <div class="text-4xl font-bold text-blue-600 mb-2">
+              <%= plan[:price] %><span class="text-lg text-gray-500"><%= plan[:period] %></span>
+            </div>
+          </div>
+          
+          <!-- Features List -->
+          <ul class="space-y-3 mb-8">
+            <% plan[:features].each do |feature| %>
+              <li class="flex items-center">
+                <span class="text-green-500 mr-3">✓</span>
+                <span class="text-gray-600"><%= feature %></span>
+              </li>
+            <% end %>
+          </ul>
+          
+          <!-- CTA Button -->
+          <div class="text-center">
+            <button class="w-full py-3 px-6 rounded-lg font-bold text-lg transition-all duration-300 <%= plan[:cta_class] == 'btn-primary' ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white' %>">
+              <%= plan[:cta_text] %>
+            </button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">
+        <span class="text-blue-600">자주 묻는</span> 질문
+      </h2>
+      <p class="text-xl text-gray-600">
+        궁금한 점이 있으시면 확인해보세요
+      </p>
+    </div>
+    
+    <!-- FAQ List -->
+    <div class="max-w-3xl mx-auto space-y-4">
+      <% @faqs.each_with_index do |faq, index| %>
+        <div class="bg-gray-50 rounded-lg">
+          <button 
+            class="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
+            onclick="toggleFaq(<%= index %>)"
+          >
+            <div class="flex justify-between items-center">
+              <h3 class="text-lg font-semibold text-gray-800"><%= faq[:question] %></h3>
+              <span id="faq-icon-<%= index %>" class="text-blue-600 text-xl">+</span>
+            </div>
+          </button>
+          <div id="faq-answer-<%= index %>" class="hidden px-6 pb-6">
+            <p class="text-gray-600 leading-relaxed"><%= faq[:answer] %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA Section -->
+<section class="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+  <div class="container mx-auto px-4 text-center">
+    <h2 class="text-4xl font-bold mb-4">
+      지금 바로 특허 번역을 시작해보세요! 🚀
+    </h2>
+    <p class="text-xl mb-8 text-blue-100">
+      "첫 5페이지는 무료로 체험할 수 있습니다"
+    </p>
+    <a href="#" class="bg-yellow-500 hover:bg-yellow-400 text-blue-900 font-bold py-4 px-12 rounded-lg text-xl transition-all duration-300 transform hover:scale-105 inline-block">
+      무료 회원가입하기
+    </a>
+  </div>
+</section>
+
+<!-- JavaScript for Interactive Features -->
+<script>
+  // FAQ Toggle Function
+  function toggleFaq(index) {
+    const answer = document.getElementById(`faq-answer-${index}`);
+    const icon = document.getElementById(`faq-icon-${index}`);
+    
+    if (answer.classList.contains('hidden')) {
+      answer.classList.remove('hidden');
+      icon.textContent = '−';
+    } else {
+      answer.classList.add('hidden');
+      icon.textContent = '+';
+    }
+  }
+  
+  // Demo Translation Function
+  document.getElementById('demo-translate-btn').addEventListener('click', async function() {
+    const inputText = document.getElementById('demo-input').value.trim();
+    const outputDiv = document.getElementById('demo-output');
+    const button = this;
+    
+    if (!inputText) {
+      alert('번역할 텍스트를 입력해주세요.');
+      return;
+    }
+    
+    // Loading state
+    button.disabled = true;
+    button.innerHTML = '⏳ 번역 중...';
+    outputDiv.innerHTML = '<div class="animate-pulse">AI가 번역하고 있습니다...</div>';
+    
+    try {
+      const response = await fetch('/demo_translate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({ text: inputText })
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok) {
+        outputDiv.innerHTML = `
+          <div class="text-gray-800">${data.translated}</div>
+          <div class="text-sm text-yellow-600 mt-2">${data.message}</div>
+        `;
+      } else {
+        outputDiv.innerHTML = `<div class="text-red-500">${data.error}</div>`;
+      }
+    } catch (error) {
+      outputDiv.innerHTML = '<div class="text-red-500">번역 중 오류가 발생했습니다.</div>';
+    } finally {
+      // Reset button
+      button.disabled = false;
+      button.innerHTML = '⚡ 번역하기';
+    }
+  });
+  
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+</script>
