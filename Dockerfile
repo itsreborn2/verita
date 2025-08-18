@@ -42,6 +42,12 @@ RUN bundle install && \
 # Copy application code
 COPY . .
 
+# Normalize line endings and ensure executable bit for all bin scripts
+# - Windows 환경에서 체크아웃된 파일은 CRLF(\r\n) 개행과 실행 권한 부재로 인해
+#   빌드 중 "Permission denied" 또는 "ruby\r not found"류 에러가 발생할 수 있음.
+# - 아래 단계는 bin/* 내 모든 파일의 개행을 LF로 통일하고 실행 권한(+x)을 부여함.
+RUN find bin -type f -exec sed -i 's/\r$//' {} \; && chmod +x bin/*
+
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 

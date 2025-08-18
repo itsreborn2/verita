@@ -2,30 +2,29 @@
   <!-- 첫 번째 섹션: 전체 화면 높이 차지 -->
   <section class="h-screen">
     <div class="container mx-auto max-w-none px-5 md:px-8 lg:px-12 xl:px-16 h-full">
-      <div class="grid grid-cols-2 grid-rows-[auto_1fr_auto] gap-px h-full">
+      <div class="grid grid-cols-1 md:grid-cols-2 grid-rows-[auto_1fr_auto_auto] md:grid-rows-[auto_1fr_auto] gap-px h-full">
 
       <!-- 1. Header Area (Top row) -->
-      <header class="col-span-2 grid grid-cols-2 items-center py-4 border-b border-dotted border-[#D6C6B4]">
-        <div class="p-4 flex items-center">
+      <header class="col-span-1 md:col-span-2 grid grid-cols-1 sm:grid-cols-2 items-center py-4 border-b border-dotted border-[#D6C6B4]">
+        <div class="p-4 flex items-center justify-center sm:justify-start">
           <span class="text-xl font-bold tracking-[0.2em]">VERITA AI</span>
         </div>
-        <nav class="p-4 flex items-center justify-end space-x-10 text-xs font-bold tracking-widest">
+        <nav class="p-4 flex flex-col sm:flex-row items-center justify-center sm:justify-end space-y-4 sm:space-y-0 sm:space-x-6 text-xs font-bold tracking-widest">
           <a href="#" class="hover:text-[#E86A33]">ABILITIES</a>
           <a href="#" class="hover:text-[#E86A33]">HOW IT WORKS</a>
           <a href="#" class="hover:text-[#E86A33]">STAY CONNECTED</a>
         </nav>
       </header>
 
-      <!-- 2. Content Area (Middle row, Left column) -->
-      <div class="border-r border-dotted border-[#D6C6B4] p-4 flex flex-col justify-between relative">
+      <!-- 2. Content Area (Left column on Desktop, Top on Mobile) -->
+      <div class="border-b md:border-r border-dotted border-[#D6C6B4] md:border-b-0 p-4 flex flex-col justify-between relative min-h-[60vh] md:min-h-0 order-2 md:order-1">
         <!-- 현대적인 배경 디자인 (글래스모피즘과 그라데이션) -->
         <div class="absolute inset-0 overflow-hidden z-0" style="pointer-events: none;">
           <!-- 배경 그라데이션 효과 -->
           <div class="absolute inset-0 bg-gradient-to-br from-[#F5EFE6] via-[#F5EFE6] to-[#FFDAB9] opacity-60"></div>
           
           <!-- 유리형 육각형 디자인 1 (크고 기울어진) -->
-          <div class="absolute w-[70%] h-[60%] top-[5%] left-[-10%] rotate-[-15deg] rounded-2xl overflow-hidden" 
-               style="backdrop-filter: blur(10px); background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1)); border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 8px 32px 0 rgba(31,38,135,0.1);">
+          <div class="absolute w-[70%] h-[60%] top-[5%] left-[-10%] rotate-[-15deg] rounded-2xl overflow-hidden" style="backdrop-filter: blur(10px); background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1)); border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 8px 32px 0 rgba(31,38,135,0.1);">
             
             <!-- 데이터 흐름 표현 선 -->
             <div class="absolute top-[20%] left-[10%] w-[80%] h-[1px] bg-gradient-to-r from-transparent via-white to-transparent opacity-40"></div>
@@ -43,8 +42,7 @@
           </div>
           
           <!-- 유리형 사각형 디자인 2 (작은 크기) -->
-          <div class="absolute w-[50%] h-[50%] bottom-[0%] right-[-5%] rotate-[10deg] rounded-2xl overflow-hidden" 
-               style="backdrop-filter: blur(12px); background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05)); border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 8px 32px 0 rgba(31,38,135,0.1);">
+          <div class="absolute w-[50%] h-[50%] bottom-[0%] right-[-5%] rotate-[10deg] rounded-2xl overflow-hidden" style="backdrop-filter: blur(12px); background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05)); border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 8px 32px 0 rgba(31,38,135,0.1);">
             
             <!-- 기술적 그리드 패턴 -->
             <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(to right, rgba(233, 106, 51, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(233, 106, 51, 0.1) 1px, transparent 1px); background-size: 20px 20px;"></div>
@@ -152,21 +150,21 @@
         <div></div> <!-- Empty div for spacing -->
       </div>
 
-      <!-- 3. Content Area (Middle row, Right column) -->
-      <div class="p-4 flex flex-col justify-end items-end">
-        <div class="text-right">
-          <div class="flex flex-col items-end w-full">
-            <h1 class="text-8xl font-medium leading-none self-start">Meet</h1>
-            <h1 class="text-8xl font-medium leading-none mt-2">Verita AI</h1>
+      <!-- 3. Content Area (Right column on Desktop, Bottom on Mobile) -->
+      <div class="p-8 md:p-4 flex flex-col justify-center md:justify-end items-center md:items-end text-center md:text-right order-1 md:order-2">
+        <div class="text-center md:text-right">
+          <div class="flex flex-col items-center md:items-end w-full">
+            <h1 class="text-6xl md:text-8xl font-medium leading-none self-center md:self-start">Meet</h1>
+            <h1 class="text-6xl md:text-8xl font-medium leading-none mt-2">Verita AI</h1>
           </div>
-          <p class="text-lg max-w-md mt-8 leading-relaxed">
+          <p class="text-base md:text-lg max-w-md mt-8 leading-relaxed">
             Verita AI는 <span class="text-[#E86A33] font-semibold">기존 특허 번역 대비 90% 이상 빠른 속도</span>와 일반 AI 번역을 압도하는 <span class="text-[#E86A33] font-semibold">법률적 정확성</span>을 제공합니다. 대폭 단축된 업무 시간과 귀사의 소중한 지적 재산권을 완벽하게 보호하는 특허 번역의 <span class="text-[#E86A33]">새로운 기준</span>을 경험하세요.
           </p>
         </div>
       </div>
 
       <!-- 4. Footer Area (Bottom row) -->
-      <footer class="col-span-2 grid grid-cols-2 items-center py-4 border-t border-dotted border-[#D6C6B4]">
+      <footer class="col-span-1 md:col-span-2 grid grid-cols-2 items-center py-4 border-t border-dotted border-[#D6C6B4] order-3">
           <div class="p-4"></div>
           <div class="p-4 flex items-center justify-end">
               <span class="text-xs font-bold tracking-widest">SCROLL DOWN</span>
