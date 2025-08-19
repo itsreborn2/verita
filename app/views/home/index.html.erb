@@ -66,10 +66,7 @@
           <div class="absolute top-[60%] left-[25%] w-2 h-2 rounded-full bg-[#4A403A] opacity-20"></div>
         </div>
         
-        <div class="pt-4 relative z-10">
-          <h2 class="text-xs font-bold tracking-widest">CREATIVITY</h2>
-          <p class="text-xs tracking-widest">POWERED BY CODE</p>
-        </div>
+        
         <div class="relative flex items-center justify-center security-animation-container" data-security-animation-target="shield" py-8 relative z-10">
           <!-- Abstract visual element - A simple animated SVG to mimic the reference -->
           <div class="w-48 h-48 relative">
@@ -160,7 +157,7 @@
             <h1 class="text-8xl font-medium leading-none mt-2">Verita AI</h1>
           </div>
           <p class="text-lg max-w-md mt-8 leading-relaxed">
-            Verita AI는 <span class="text-[#E86A33] font-semibold">기존 특허 번역 대비 90% 이상 빠른 속도</span>와 일반 AI 번역을 압도하는 <span class="text-[#E86A33] font-semibold">법률적 정확성</span>을 제공합니다. 대폭 단축된 업무 시간과 귀사의 소중한 지적 재산권을 완벽하게 보호하는 특허 번역의 <span class="text-[#E86A33]">새로운 기준</span>을 경험하세요.
+            Verita AI는 <span class="text-[#E86A33] font-semibold">기존 특허 번역 대비 95% 이상 빠른 속도</span>와 <span class="text-[#E86A33] font-semibold">50% 이상 저렴한 가격</span>, 그리고 일반 AI 번역을 압도하는 <span class="text-[#E86A33] font-semibold">법률적 정확성</span>을 제공합니다. 대폭 단축된 업무 시간과 귀사의 소중한 지적 재산권을 완벽하게 보호하는 특허 번역의 <span class="text-[#E86A33]">새로운 기준</span>을 경험하세요.
           </p>
         </div>
       </div>
@@ -188,12 +185,66 @@
                   <span class="font-bold text-gray-900">특허 번역 2건을 무료로 체험하세요.</span>
                 </p>
               <div class="mt-10 flex items-center justify-center gap-x-6">
-                <a href="#" class="rounded-md bg-[#E86A33] px-8 py-4 text-lg font-semibold text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500 transition duration-300 ease-in-out transform hover:scale-105">
-                  무료 번역 시작하기
+                <!-- 클릭 시 이메일 주소를 클립보드로 복사합니다. 컨트롤러: copy-to-clipboard -->
+                <a href="#"
+                   data-controller="copy-to-clipboard"
+                   data-action="click->copy-to-clipboard#copy"
+                   data-copy-to-clipboard-email-value="contact@verita-ai.example"
+                   class="rounded-md bg-[#E86A33] px-8 py-4 text-lg font-semibold text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500 transition duration-300 ease-in-out transform hover:scale-105">
+                  <span data-copy-to-clipboard-target="label">무료 번역 시작하기</span>
                 </a>
               </div>
             </div>
           </div>
+
+  <!-- 가격 정책 섹션: 아래 블록은 제공된 마케팅 카피의 "ROI 및 가격 정책" 내용을 반영하여 작성되었습니다. -->
+  <div id="pricing" class="bg-[#F5EFE6] py-20 border-t border-dotted border-[#D6C6B4]">
+    <div class="w-full max-w-7xl mx-auto px-4">
+      <h2 class="text-4xl font-light text-center mb-4">ROI 및 <span class="text-[#E86A33] font-medium">가격 정책</span></h2>
+      <p class="text-center text-gray-600 mb-12">100페이지 기준 비용 비교와 초기 고객 특별가 안내</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- 비용 비교 카드 -->
+        <div class="bg-white/60 rounded-xl p-8 border border-gray-200">
+          <h3 class="text-xl font-semibold mb-4">기존 방식 대비 비용 분석 (100페이지)</h3>
+          <ul class="space-y-3 text-gray-700">
+            <li>• 전문가 팀: <strong>3~400만원</strong> + 7일 + 추가 대응 어려움</li>
+            <li>• Verita AI: <strong>250만원</strong> <span class="text-sm text-gray-500">(페이지당 25,000원)</span> + 3시간 + <strong>무제한 수정</strong></li>
+            <li>• 초기 고객 특별가: <strong class="text-[#E86A33]">99만원</strong> <span class="text-sm text-gray-500">(페이지당 9,900원)</span> + 3시간 + <strong>무제한 수정</strong></li>
+          </ul>
+
+          <div class="mt-6 p-4 bg-[#fff7f3] border border-[#fde1d6] rounded-lg text-sm text-gray-700">
+            <p class="font-medium">특별 혜택</p>
+            <p>• 구매하신 페이지수만큼 <strong>1+1 보너스</strong> (최대 200페이지)</p>
+            <p>• <strong>3개월 내 100% 환불 보장</strong> (불만족시)</p>
+          </div>
+        </div>
+
+        <!-- ROI 카드 -->
+        <div class="bg-white/60 rounded-xl p-8 border border-gray-200">
+          <h3 class="text-xl font-semibold mb-4">투자 대비 수익(ROI)</h3>
+          <ul class="space-y-3 text-gray-700">
+            <li>• 시간 절약: <strong>7일 → 3시간</strong> (95% 단축)</li>
+            <li>• 비용 절감: <strong>50% 직접 절감</strong> + 검수 시간 및 리스크 축소</li>
+            <li>• 기회비용: 긴급건 대응 가능</li>
+            <li>• 품질 보장: <strong>3개월 내 100% 환불 보장</strong></li>
+          </ul>
+
+          <!-- 단순 시각화 막대 -->
+          <div class="mt-6">
+            <div class="flex items-center justify-between text-sm text-gray-600">
+              <span>예상 ROI</span>
+              <span class="font-semibold text-[#E86A33]">300%+</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+              <div class="bg-[#E86A33] h-2 rounded-full" style="width: 85%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
   <!-- 나머지 섹션들: 스크롤로 확인 -->
   <div class="container mx-auto max-w-none px-5 md:px-8 lg:px-12 xl:px-16">
@@ -202,20 +253,292 @@
       <div class="w-full max-w-7xl mx-auto px-4 text-center">
         <h2 class="text-4xl font-light mb-6">AI와 전문가의 협업, <span class="text-[#E86A33] font-medium">비용과 시간의 혁신</span></h2>
         <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
-          멀티 AI 에이전트의 초벌 번역과 전문 인력의 최종 검수를 통해, 번역 품질은 유지하면서 비용은 30% 이상, 소요 시간은 90% 이상 획기적으로 절감했습니다.
+          멀티 AI 에이전트의 초벌 번역과 전문 인력의 최종 검수를 통해, 번역 품질은 유지하면서 비용은 50% 이상, 소요 시간은 95% 이상 획기적으로 절감했습니다.
         </p>
         <div class="flex flex-wrap justify-center gap-8">
           <div class="bg-white/50 p-8 rounded-lg border border-gray-200 w-80">
-            <h3 class="text-2xl font-semibold text-[#4A403A] mb-2">비용 30% 이상 절감</h3>
+            <h3 class="text-2xl font-semibold text-[#4A403A] mb-2">비용 50% 이상 절감</h3>
             <p class="text-gray-600">AI 기반 자동화로 불필요한 수작업을 최소화하여 합리적인 비용을 제공합니다.</p>
           </div>
           <div class="bg-white/50 p-8 rounded-lg border border-gray-200 w-80">
-            <h3 class="text-2xl font-semibold text-[#4A403A] mb-2">시간 90% 이상 단축</h3>
+            <h3 class="text-2xl font-semibold text-[#4A403A] mb-2">시간 95% 이상 단축</h3>
             <p class="text-gray-600">24시간 가동되는 AI 시스템이 신속하게 초안을 완성하여 최종 납기일을 앞당깁니다.</p>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- 이미지 비교 기능 섹션 -->
+    <div class="py-20 border-b border-dotted border-[#D6C6B4] bg-gradient-to-b from-white to-[#faf9f7]">
+      <div class="w-full max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-light mb-6">번역 품질의 <span class="text-[#E86A33] font-medium">차이를 직접 확인하세요</span></h2>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
+            마우스를 올려보세요. 일반 번역과 VERITA AI 번역의 차이를 실시간으로 비교할 수 있습니다.
+          </p>
+        </div>
+        
+        <!-- 이미지 비교 컨테이너 -->
+        <div 
+          id="image-compare-container"
+          class="relative max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden"
+        >
+          <!-- 기본 이미지 (번역 후) -->
+          <img 
+            id="after-image"
+            src="/assets/images/after_translation.png"
+            class="w-full h-auto block max-h-96 object-contain"
+            alt="번역 후 문서"
+          />
+          
+          <!-- 오버레이 (번역 전 이미지 영역) - 세로 절반 분할 -->
+          <div 
+            id="overlay"
+            class="absolute top-0 left-0 pointer-events-none overflow-hidden"
+            style="opacity: 1; background-repeat: no-repeat; height: 100%; width: 50%; border-right: 3px solid #E86A33;"
+          >
+            <!-- 오버레이 라벨 -->
+            <div class="absolute top-4 right-4 bg-[#4A403A] text-white text-sm px-3 py-2 rounded shadow-lg">
+              원본
+            </div>
+          </div>
+          
+          <!-- 분할선 -->
+          <div 
+            id="divider"
+            class="absolute top-0 w-1 bg-[#E86A33] shadow-lg pointer-events-none"
+            style="height: 100%; left: 50%; opacity: 1; z-index: 10;"
+          >
+            <!-- 분할선 핸들 -->
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-[#E86A33] rounded-full shadow-lg border-2 border-white"></div>
+            
+            <!-- VERITA AI 번역 라벨 (분할선 상단 우측) -->
+            <div class="absolute -top-2 left-6 bg-[#E86A33] text-white text-xs font-bold px-2 py-1 rounded-full shadow-xl border-2 border-white whitespace-nowrap z-20">
+              AI번역
+            </div>
+          </div>
+          
+          <!-- 안내 텍스트 -->
+          <div class="absolute bottom-4 left-4 bg-black bg-opacity-70 text-white text-sm px-3 py-2 rounded-lg">
+            마우스를 좌우로 움직여보세요
+          </div>
+        </div>
+        
+        <!-- 설명 텍스트 -->
+        <div class="mt-8 text-center">
+          <p class="text-sm text-gray-500 max-w-2xl mx-auto">
+            왼쪽은 일반 번역, 오른쪽은 VERITA AI의 전문 번역 결과입니다. 
+            전문 용어의 정확성과 문맥 이해도의 차이를 확인해보세요.
+          </p>
+        </div>
+        
+        <!-- 중국어 번역 비교 -->
+        <div class="text-center mb-12" style="margin-top: 70px;">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4" style="padding-top: 30px;">
+            중국어 번역 품질 비교
+          </h2>
+        </div>
+        
+        <!-- 이미지 비교 컨테이너 -->
+        <div 
+          id="chinese-compare-container"
+          class="relative max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden"
+        >
+          <!-- 기본 이미지 (중국어 번역 후) -->
+          <img 
+            id="chinese-after-image"
+            src="/assets/images/after_chinese.png"
+            class="w-full h-auto block max-h-96 object-contain"
+            alt="중국어 번역 후 문서"
+          />
+          
+          <!-- 오버레이 (번역 전 이미지 영역) - 세로 절반 분할 -->
+          <div 
+            id="chinese-overlay"
+            class="absolute top-0 left-0 pointer-events-none overflow-hidden"
+            style="opacity: 1; background-repeat: no-repeat; height: 100%; width: 50%; border-right: 3px solid #E86A33;"
+          >
+            <!-- 오버레이 라벨 -->
+            <div class="absolute top-4 right-4 bg-[#4A403A] text-white text-sm px-3 py-2 rounded shadow-lg">
+              원본
+            </div>
+          </div>
+          
+          <!-- 분할선 -->
+          <div 
+            id="chinese-divider"
+            class="absolute top-0 w-1 bg-[#E86A33] shadow-lg pointer-events-none"
+            style="height: 100%; left: 50%; opacity: 1; z-index: 10;"
+          >
+            <!-- 분할선 핸들 -->
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-[#E86A33] rounded-full shadow-lg border-2 border-white"></div>
+            
+            <!-- VERITA AI 번역 라벨 (분할선 상단 우측) -->
+            <div class="absolute -top-2 left-6 bg-[#E86A33] text-white text-xs font-bold px-2 py-1 rounded-full shadow-xl border-2 border-white whitespace-nowrap z-20">
+              AI중국어
+            </div>
+          </div>
+          
+          <!-- 안내 텍스트 -->
+          <div class="absolute bottom-4 left-4 bg-black bg-opacity-70 text-white text-sm px-3 py-2 rounded-lg">
+            마우스를 좌우로 움직여보세요
+          </div>
+        </div>
+        
+        <!-- 설명 텍스트 -->
+        <div class="mt-8 text-center">
+          <p class="text-sm text-gray-500 max-w-2xl mx-auto">
+            왼쪽은 일반 번역, 오른쪽은 VERITA AI의 전문 중국어 번역 결과입니다. 
+            한자 표현과 문화적 맥락의 차이를 확인해보세요.
+          </p>
+        </div>
+        
+        <!-- 일본어 번역 비교 -->
+        <div class="text-center mb-12" style="margin-top: 70px;">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4" style="padding-top: 30px;">
+            일본어 번역 품질 비교
+          </h2>
+        </div>
+        
+        <!-- 이미지 비교 컨테이너 -->
+        <div 
+          id="japanese-compare-container"
+          class="relative max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden"
+        >
+          <!-- 기본 이미지 (일본어 번역 후) -->
+          <img 
+            id="japanese-after-image"
+            src="/assets/images/after_japanese.png"
+            class="w-full h-auto block max-h-96 object-contain"
+            alt="일본어 번역 후 문서"
+          />
+          
+          <!-- 오버레이 (번역 전 이미지 영역) - 세로 절반 분할 -->
+          <div 
+            id="japanese-overlay"
+            class="absolute top-0 left-0 pointer-events-none overflow-hidden"
+            style="opacity: 1; background-repeat: no-repeat; height: 100%; width: 50%; border-right: 3px solid #E86A33;"
+          >
+            <!-- 오버레이 라벨 -->
+            <div class="absolute top-4 right-4 bg-[#4A403A] text-white text-sm px-3 py-2 rounded shadow-lg">
+              원본
+            </div>
+          </div>
+          
+          <!-- 분할선 -->
+          <div 
+            id="japanese-divider"
+            class="absolute top-0 w-1 bg-[#E86A33] shadow-lg pointer-events-none"
+            style="height: 100%; left: 50%; opacity: 1; z-index: 10;"
+          >
+            <!-- 분할선 핸들 -->
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-[#E86A33] rounded-full shadow-lg border-2 border-white"></div>
+            
+            <!-- VERITA AI 번역 라벨 (분할선 상단 우측) -->
+            <div class="absolute -top-2 left-6 bg-[#E86A33] text-white text-xs font-bold px-2 py-1 rounded-full shadow-xl border-2 border-white whitespace-nowrap z-20">
+              AI일본어
+            </div>
+          </div>
+          
+          <!-- 안내 텍스트 -->
+          <div class="absolute bottom-4 left-4 bg-black bg-opacity-70 text-white text-sm px-3 py-2 rounded-lg">
+            마우스를 좌우로 움직여보세요
+          </div>
+        </div>
+        
+        <!-- 설명 텍스트 -->
+        <div class="mt-8 text-center">
+          <p class="text-sm text-gray-500 max-w-2xl mx-auto">
+            왼쪽은 일반 번역, 오른쪽은 VERITA AI의 전문 일본어 번역 결과입니다. 
+            경어 표현과 기술 용어의 정확성 차이를 확인해보세요.
+          </p>
+        </div>
+
+    <script>
+      // 이미지 비교 기능 - 세로 분할 방식 (디폴트 50% 분할)
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log('Image compare script loaded - vertical split mode with 50% default');
+        
+        // 영어 번역 비교
+        setupImageComparison('image-compare-container', 'overlay', 'divider', 'after-image', '/assets/images/before_translation.png');
+        
+        // 중국어 번역 비교
+        setupImageComparison('chinese-compare-container', 'chinese-overlay', 'chinese-divider', 'chinese-after-image', '/assets/images/before_translation.png');
+        
+        // 일본어 번역 비교
+        setupImageComparison('japanese-compare-container', 'japanese-overlay', 'japanese-divider', 'japanese-after-image', '/assets/images/before_translation.png');
+      });
+
+      // 이미지 비교 기능 설정 함수
+      function setupImageComparison(containerId, overlayId, dividerId, afterImageId, beforeImageSrc) {
+        const container = document.getElementById(containerId);
+        const overlay = document.getElementById(overlayId);
+        const divider = document.getElementById(dividerId);
+        const afterImage = document.getElementById(afterImageId);
+        
+        if (!container || !overlay || !divider || !afterImage) {
+          console.error(`Required elements not found for ${containerId}`);
+          return;
+        }
+        
+        // 초기 설정 - 50% 분할로 시작
+        function initializeComparison() {
+          const rect = container.getBoundingClientRect();
+          overlay.style.backgroundImage = `url(${beforeImageSrc})`;
+          overlay.style.backgroundPosition = '0 0';
+          overlay.style.backgroundSize = `${rect.width}px ${rect.height}px`;
+          overlay.style.backgroundRepeat = 'no-repeat';
+          console.log(`Initialized ${containerId} with 50% split`);
+        }
+        
+        // 이미지 로드 후 초기화
+        afterImage.addEventListener('load', initializeComparison);
+        if (afterImage.complete) {
+          initializeComparison();
+        }
+        
+        // 마우스 진입 - 이미 표시되어 있으므로 추가 효과만
+        container.addEventListener('mouseenter', function() {
+          console.log(`Mouse entered ${containerId}`);
+          divider.style.transform = 'scaleY(1.02)';
+          divider.style.transition = 'transform 0.2s ease';
+        });
+        
+        // 마우스 이동 - 세로 분할
+        container.addEventListener('mousemove', function(event) {
+          const rect = container.getBoundingClientRect();
+          const x = event.clientX - rect.left;
+          
+          // 마우스 X 좌표를 퍼센트로 변환 (0% ~ 100%)
+          const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+          
+          // 오버레이 너비를 마우스 위치에 따라 조정
+          overlay.style.width = percentage + '%';
+          
+          // 분할선 위치 조정
+          divider.style.left = percentage + '%';
+          
+          // 배경 이미지 설정 (번역 전 이미지)
+          overlay.style.backgroundImage = `url(${beforeImageSrc})`;
+          overlay.style.backgroundPosition = '0 0';
+          overlay.style.backgroundSize = `${rect.width}px ${rect.height}px`;
+          overlay.style.backgroundRepeat = 'no-repeat';
+        });
+        
+        // 마우스 이탈 - 50%로 복귀
+        container.addEventListener('mouseleave', function() {
+          console.log(`Mouse left ${containerId} - returning to 50% split`);
+          overlay.style.width = '50%';
+          divider.style.left = '50%';
+          divider.style.transform = 'scaleY(1)';
+        });
+        
+        // 윈도우 리사이즈 시 재초기화
+        window.addEventListener('resize', function() {
+          initializeComparison();
+        });
+      }
+    </script>
 
     <div class="py-20 border-b border-dotted border-[#D6C6B4]">
       <div class="w-full max-w-7xl mx-auto px-4 text-center">
@@ -677,6 +1000,23 @@
             <li><strong>법인명:</strong> (주)베리타에이아이</li>
             <li><strong>대표:</strong> 유성원</li>
             <li><strong>주소:</strong> 서울특별시 강남구 테헤란로 123, 45층</li>
+            <!-- 문의 이메일: 클릭 시 복사(Stimulus: copy-to-clipboard) -->
+            <li>
+              <strong>이메일:</strong>
+              <a
+                href="#"
+                class="text-gray-300 hover:text-white underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-400 rounded-sm"
+                title="이메일 주소 복사"
+                aria-label="이메일 주소 복사"
+                data-controller="copy-to-clipboard"
+                data-action="click->copy-to-clipboard#copy"
+                data-copy-to-clipboard-email-value="veritaai.korea@gmail.com"
+                data-copy-to-clipboard-success-text-value="복사 완료!"
+                data-copy-to-clipboard-revert-ms-value="1500"
+              >
+                <span data-copy-to-clipboard-target="label">veritaai.korea@gmail.com</span>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
