@@ -1,0 +1,200 @@
+<div class="bg-[#F5EFE6] text-[#4A403A] min-h-screen">
+  <section class="mb-16 md:mb-24">
+    <div class="container mx-auto max-w-none px-5 md:px-8 lg:px-12 xl:px-16">
+      <div class="grid grid-cols-2 grid-rows-[auto] gap-px mobile-main-grid">
+        <!-- Header Area -->
+        <header class="col-span-2 grid grid-cols-2 items-center py-4 border-b border-dotted border-[#D6C6B4] mobile-header-grid font-serif">
+          <div class="p-4 flex items-center mobile-header-brand">
+            <%# 헤더 브랜드 클릭 시 홈(root_path)으로 이동하도록 링크 적용 %>
+            <%= link_to root_path do %>
+              <span class="text-xl font-bold tracking-[0.2em]">VERITA AI</span>
+            <% end %>
+          </div>
+          <nav class="p-4 flex items-center justify-end space-x-8 text-sm font-bold tracking-widest mobile-header-nav">
+            <a href="/" class="hover:text-[#E86A33]">Home</a>
+            <a href="/pricing" class="hover:text-[#E86A33]">Pricing</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+  </section>
+
+  <!-- 메인 컨텐츠 -->
+  <div class="container mx-auto px-4 pt-32 md:pt-36 pb-12 mt-16 md:mt-24" style="max-width: 480px;">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-[#4A403A] mb-2">문의하기</h1>
+    </div>
+
+    <!-- Flash 메시지 -->
+    <% if flash[:success] %>
+      <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
+        <%= flash[:success] %>
+      </div>
+    <% end %>
+    
+    <% if flash[:error] %>
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+        <%= flash[:error] %>
+      </div>
+    <% end %>
+
+    <!-- 번역 요청 폼 -->
+    <div class="bg-[#F5EFE6] p-0 mt-10 md:mt-12">
+      <%= form_with url: send_translation_request_path, method: :post, multipart: true, local: true, class: "space-y-4" do |form| %>
+
+        <!-- 이름 -->
+        <div>
+          <%= form.label :name, class: "block text-sm font-medium text-[#4A403A] mb-2" do %>
+            이름 <span class="text-red-500">*</span>
+          <% end %>
+          <%= form.text_field :name, 
+              class: "w-full px-4 py-2 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-1 focus:ring-[#E86A33] focus:border-[#E86A33]",
+              placeholder: "홍길동",
+              required: true %>
+        </div>
+        
+        <!-- 회사 -->
+        <div>
+          <%= form.label :company, class: "block text-sm font-medium text-[#4A403A] mb-2" do %>
+            회사 <span class="text-red-500">*</span>
+          <% end %>
+          <%= form.text_field :company, 
+              class: "w-full px-4 py-2 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-1 focus:ring-[#E86A33] focus:border-[#E86A33]",
+              placeholder: "베리타특허법인",
+              required: true %>
+        </div>
+        
+        <!-- 이메일 -->
+        <div>
+          <%= form.label :email, class: "block text-sm font-medium text-[#4A403A] mb-2" do %>
+            이메일 <span class="text-red-500">*</span>
+          <% end %>
+          <%= form.email_field :email, 
+              class: "w-full px-4 py-2 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-1 focus:ring-[#E86A33] focus:border-[#E86A33]",
+              placeholder: "veritaai.korea@gmail.com",
+              required: true %>
+        </div>
+        
+        <!-- 전화번호 -->
+        <div>
+          <%= form.label :phone, "전화번호 (선택)", class: "block text-sm font-medium text-[#4A403A] mb-2" %>
+          <%= form.text_field :phone, 
+              class: "w-full px-4 py-2 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-1 focus:ring-[#E86A33] focus:border-[#E86A33]" %>
+        </div>
+
+        <!-- 번역 유형 선택 -->
+        <div>
+          <%= form.label :translation_type, "항목을 선택하세요.", class: "block text-sm font-medium text-[#4A403A] mb-2" %>
+          <div class="space-y-2">
+            <% [
+              { value: 'general', label: '일반 번역' },
+              { value: 'urgent', label: '긴급 번역' },
+              { value: 'rejection_notice', label: '거절이유 통지서 번역' },
+              { value: 'inquiry', label: '기타 문의' }
+            ].each do |option| %>
+              <label class="flex items-center">
+                <%= form.radio_button :translation_type, option[:value], class: "mr-2 text-[#E86A33] focus:ring-[#E86A33]" %>
+                <span class="text-sm text-[#4A403A]"><%= option[:label] %></span>
+              </label>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- 파일 첨부 -->
+        <div>
+          <%= form.label :file, "파일 첨부 (선택)", class: "block text-sm font-medium text-[#4A403A] mb-2" %>
+          <div class="relative">
+            <%= form.file_field :file, 
+                class: "hidden",
+                accept: ".pdf,.doc,.docx,.txt",
+                id: "file_input",
+                onchange: "
+                  var displayElement = document.getElementById('file_display');
+                  if (this.files && this.files[0]) {
+                    displayElement.textContent = this.files[0].name;
+                    displayElement.className = 'text-[#4A403A]';
+                  } else {
+                    displayElement.textContent = '이곳을 눌러 파일을 선택하세요';
+                    displayElement.className = 'text-gray-500';
+                  }
+                " %>
+            <div class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-1 focus:ring-[#E86A33] focus:border-[#E86A33] cursor-pointer flex items-center justify-between"
+                 onclick="document.getElementById('file_input').click()">
+              <span id="file_display" class="text-gray-500">이곳을 눌러 파일을 선택하세요</span>
+            </div>
+          </div>
+          <p class="text-xs text-gray-500 mt-1">파일은 보안상 전송즉시 삭제됩니다.</p>
+        </div>
+
+        <!-- 메시지 입력 -->
+        <div>
+          <%= form.label :content, "메시지를 입력해주세요", class: "block text-sm font-medium text-[#4A403A] mb-2" %>
+          <%= form.text_area :content, 
+              rows: 6,
+              class: "w-full px-4 py-2 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-1 focus:ring-[#E86A33] focus:border-[#E86A33]",
+              placeholder: "요청사항을 적어주세요.",
+              required: true %>
+        </div>
+
+        <!-- 발송 버튼 -->
+        <div class="pt-4 pb-12 md:pb-16 flex justify-center">
+          <%= form.submit "문의하기", 
+              class: "w-[30%] bg-[#E86A33] text-white py-3 px-6 rounded-lg font-semibold hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-[#E86A33] focus:ring-offset-2 transition-colors cursor-pointer shadow-sm" %>
+        </div>
+
+      <% end %>
+    </div>
+
+  </div>
+</div>
+
+<footer class="bg-[#4A403A] text-white w-full">
+  <div class="w-full py-8">
+    <div class="container mx-auto max-w-7xl px-5 md:px-8 lg:px-12 xl:px-16">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
+        <div>
+          <h3 class="text-xl font-bold tracking-[0.2em] mb-4">VERITA AI</h3>
+          <p class="text-sm text-gray-400 leading-relaxed">
+            18년 경력의 변리사의 전문성과 금융 AI의 기술력이 만나 탄생한 특허 번역의 새로운 기준.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4 text-gray-200 tracking-wider">사이트 안내</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">이용약관</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">개인정보처리방침</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4 text-gray-200 tracking-wider">회사 정보</h4>
+          <ul class="space-y-3 text-sm text-gray-400">
+            <li><strong>법인명:</strong> (주)베리타에이아이</li>
+            <li><strong>대표:</strong> 유성원</li>
+            <li><strong>주소:</strong> 서울특별시 강남구 테헤란로 123, 45층</li>
+            <!-- 문의 이메일: 클릭 시 복사(Stimulus: copy-to-clipboard) -->
+            <li>
+              <strong>이메일:</strong>
+              <a
+                href="#"
+                class="text-gray-300 hover:text-white underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-400 rounded-sm"
+                title="이메일 주소 복사"
+                aria-label="이메일 주소 복사"
+                data-controller="copy-to-clipboard"
+                data-action="click->copy-to-clipboard#copy"
+                data-copy-to-clipboard-email-value="veritaai.korea@gmail.com"
+                data-copy-to-clipboard-success-text-value="복사 완료!"
+                data-copy-to-clipboard-revert-ms-value="1500"
+              >
+                <span data-copy-to-clipboard-target="label">veritaai.korea@gmail.com</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-8 border-t border-gray-700 pt-4 text-center text-xs text-gray-500">
+        <p>&copy; 2025 Verita AI Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+

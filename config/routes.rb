@@ -16,7 +16,8 @@ Rails.application.routes.draw do
   post "demo_translate", to: "home#demo_translate"
   
   # 추가 페이지들 (향후 확장)
-  # get "pricing", to: "home#pricing"     # 가격 정책 페이지
+  get "pricing", to: "home#pricing"     # 가격 정책 페이지
+  get "contact", to: "home#contact"     # 번역 요청 폼 페이지
+  post "send_translation_request", to: "home#send_translation_request"  # 번역 요청 메일 발송
   # get "about", to: "home#about"       # 회사 소개 페이지
-  # get "contact", to: "home#contact"   # 문의하기 페이지
 end

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: #E86A33; color: white; padding: 20px; text-align: center; }
+    .content { padding: 20px; background: #f9f9f9; }
+    .info-row { margin: 10px 0; padding: 8px; background: white; border-left: 4px solid #E86A33; }
+    .label { font-weight: bold; color: #4A403A; }
+    .urgent { background: #fff3cd; border-color: #ffc107; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>VERITA AI 번역 요청</h1>
+      <% if @translation_type == 'urgent' %>
+        <p style="background: #dc3545; padding: 10px; margin: 10px 0; border-radius: 5px;">
+          🚨 긴급 번역 요청 - 10분 이내 연락 필요
+        </p>
+      <% end %>
+    </div>
+    
+    <div class="content">
+      <h2>번역 요청 정보</h2>
+      
+      <div class="info-row <%= 'urgent' if @translation_type == 'urgent' %>">
+        <span class="label">번역 유형:</span>
+        <%= case @translation_type
+            when 'general' then '일반 번역 (3시간 이내 납품)'
+            when 'urgent' then '긴급 번역 (1시간 이내 납품)'
+            else '문의 (번역 관련 상담)'
+            end %>
+      </div>
+      
+      <div class="info-row">
+        <span class="label">이름:</span> <%= @name %>
+      </div>
+      
+      <div class="info-row">
+        <span class="label">회사:</span> <%= @company %>
+      </div>
+      
+      <%# 2025-08-21: 전화번호는 선택 항목이므로, 값이 존재할 때만 표시합니다. %>
+      <% if @phone.present? %>
+        <div class="info-row">
+          <span class="label">전화번호:</span> <%= @phone %>
+        </div>
+      <% end %>
+      
+      <div class="info-row">
+        <span class="label">이메일:</span> <%= @email %>
+      </div>
+      
+      <div class="info-row">
+        <span class="label">요청 내용:</span><br>
+        <%= simple_format(@content) %>
+      </div>
+      
+      <% if attachments.any? %>
+        <div class="info-row">
+          <span class="label">첨부파일:</span>
+          <ul>
+            <% attachments.each do |attachment| %>
+              <%# 2025-08-21: Mail::Body에는 size 메서드가 없어 NoMethodError 발생 가능. %>
+              <%#          안전하게 디코딩한 문자열의 바이트 크기를 기준으로 표기합니다. %>
+              <%#          decoded가 없을 경우 raw_source를 사용하여 크기를 계산합니다. %>
+              <li>
+                <%= attachment.filename %>
+                (
+                  <%= number_to_human_size(
+                        (attachment.respond_to?(:decoded) ? attachment.decoded.to_s.bytesize : attachment.body&.raw_source.to_s.bytesize)
+                      ) %>
+                )
+              </li>
+            <% end %>
+          </ul>
+          <p style="color: #666; font-size: 12px; margin-top: 10px;">
+            ℹ️ 첨부파일은 메일 발송 후 서버에서 자동으로 삭제됩니다.
+          </p>
+        </div>
+      <% end %>
+      
+      <!-- 2025-08-21: 사용자 요청에 따라 '처리 안내' 섹션 제거(내부 수신자에게 불필요). 필요 시 이 위치에 안내 블록을 복원하세요. -->
+    
+    </div>
+  </div>
+</body>
+</html>

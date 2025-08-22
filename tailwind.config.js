@@ -10,7 +10,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        // 한국어 본문 가독성 향상을 위해 Pretendard Variable/Noto Sans KR를 우선 적용
+        sans: ['Pretendard Variable', 'Noto Sans KR', 'Inter var', ...defaultTheme.fontFamily.sans],
       },
       animation: {
         'spin-slow': 'spin 15s linear infinite',

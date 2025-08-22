@@ -31,14 +31,39 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  # Gmail SMTP 설정으로 메일 전송 활성화
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'gmail.com',
+    user_name: ENV.fetch('SMTP_USER_NAME'),  # 환경변수에서 Gmail 사용자 이메일 로드
+    password: ENV.fetch('SMTP_PASSWORD'),    # 환경변수에서 Gmail 앱 비밀번호 로드
+    authentication: 'plain',
+    enable_starttls_auto: true,
+    # 2025-08-21: Dev에서 간헐적 Net::ReadTimeout 완화 목적의 타임아웃 상향
+    # - open_timeout: SMTP 서버 연결까지 대기 시간(초)
+    # - read_timeout: SMTP 서버 응답 대기 시간(초)
+    open_timeout: ENV.fetch('SMTP_OPEN_TIMEOUT', '10').to_i,
+    read_timeout: ENV.fetch('SMTP_READ_TIMEOUT', '25').to_i
+  }
+  # 실제 메일 발송을 수행하도록 명시합니다. (기본값은 true지만, 혼선을 방지하기 위해 선언)
+  config.action_mailer.perform_deliveries = true
 
   # Make template changes take effect immediately.
   config.action_mailer.perform_caching = false
 
-  # Set localhost to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+  # 2025-08-21: 개발 환경에서 메일 본문/첨부가 로그에 덤프되는 것을 방지하기 위해 로거 비활성화
+  # (필수 최소 설정만 적용)
+  config.action_mailer.logger = nil
+
+  # 메일 템플릿에서 생성되는 URL의 호스트/포트를 환경변수로 관리합니다.
+  # 기본값: host=localhost, port=3000
+  config.action_mailer.default_url_options = {
+    host: ENV.fetch("MAILER_HOST", "localhost"),
+    port: ENV.fetch("MAILER_PORT", "3000").to_i
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

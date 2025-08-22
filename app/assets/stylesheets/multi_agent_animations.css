@@ -74,8 +74,7 @@
 
 /* 숫자 카운터 강조 효과 */
 .counter-highlight {
-  text-shadow: 0 0 5px rgba(232, 106, 51, 0.7);
-  transition: text-shadow 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 /* 비교 섹션 강조 애니메이션 */

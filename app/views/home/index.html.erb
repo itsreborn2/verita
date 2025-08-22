@@ -1,23 +1,37 @@
-<div class="bg-[#F5EFE6] text-[#4A403A] font-serif">
+<div class="bg-[#F5EFE6] text-[#4A403A]">
   <!-- 첫 번째 섹션: 전체 화면 높이 차지 -->
   <section class="h-screen">
     <div class="container mx-auto max-w-none px-5 md:px-8 lg:px-12 xl:px-16 h-full">
-      <div class="grid grid-cols-2 grid-rows-[auto_1fr_auto] gap-px h-full">
+      <div class="grid grid-cols-2 grid-rows-[auto_1fr_auto] gap-px h-full mobile-main-grid">
 
       <!-- 1. Header Area (Top row) -->
-      <header class="col-span-2 grid grid-cols-2 items-center py-4 border-b border-dotted border-[#D6C6B4]">
-        <div class="p-4 flex items-center">
-          <span class="text-xl font-bold tracking-[0.2em]">VERITA AI</span>
+      <header class="col-span-2 grid grid-cols-2 items-center py-4 border-b border-dotted border-[#D6C6B4] mobile-header-grid font-serif">
+        <div class="p-4 flex items-center mobile-header-brand">
+          <%# 헤더 브랜드 클릭 시 홈(root_path)으로 이동하도록 링크 적용 %>
+          <%= link_to root_path do %>
+            <span class="text-xl font-bold tracking-[0.2em]">VERITA AI</span>
+          <% end %>
         </div>
-        <nav class="p-4 flex items-center justify-end space-x-10 text-xs font-bold tracking-widest">
+        <nav class="p-4 flex items-center justify-end space-x-8 text-sm font-bold tracking-widest mobile-header-nav">
+          <!-- 기존 메뉴: 일시 숨김 처리 (복구용으로 주석 보존) -->
+          <!--
           <a href="#" class="hover:text-[#E86A33]">ABILITIES</a>
           <a href="#" class="hover:text-[#E86A33]">HOW IT WORKS</a>
           <a href="#" class="hover:text-[#E86A33]">STAY CONNECTED</a>
+          -->
+          <!-- Pricing 메뉴 추가 -->
+          <a href="/pricing" class="hover:text-[#E86A33]">Pricing</a>
+          <!-- 헤더 우측 CTA: 하단 버튼 스타일을 계승, 사이즈 축소 -->
+          <!-- 버튼 좌우 여백 미세 조정: px-6 -> px-5 (세로는 원래 유지) -->
+          <a href="/contact"
+             class="rounded-lg bg-[#E86A33] px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500 transition duration-300 ease-in-out transform hover:scale-105 font-sans">
+            무료 시작
+          </a>
         </nav>
       </header>
 
       <!-- 2. Content Area (Middle row, Left column) -->
-      <div class="border-r border-dotted border-[#D6C6B4] p-4 flex flex-col justify-between relative">
+      <div class="border-r border-dotted border-[#D6C6B4] p-4 h-full flex flex-col justify-between relative mobile-content-left">
         <!-- 현대적인 배경 디자인 (글래스모피즘과 그라데이션) -->
         <div class="absolute inset-0 overflow-hidden z-0" style="pointer-events: none;">
           <!-- 배경 그라데이션 효과 -->
@@ -67,9 +81,10 @@
         </div>
         
         
-        <div class="relative flex items-center justify-center security-animation-container" data-security-animation-target="shield" py-8 relative z-10">
-          <!-- Abstract visual element - A simple animated SVG to mimic the reference -->
-          <div class="w-48 h-48 relative">
+        <!-- 중앙 정렬: 절대 위치 + 전체 영역(inset-0) 사용하여 상하 기준 정확히 중앙 배치 -->
+        <div class="absolute inset-0 z-10 flex items-center justify-center security-animation-container" data-security-animation-target="shield">
+            <!-- Abstract visual element - A simple animated SVG to mimic the reference -->
+            <div class="w-48 h-48 relative mobile-animation">
             <!-- 문서 디자인 배경 패턴 (최하단 레이어) -->
             <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="absolute top-0 left-0 w-full h-full">
               <!-- 문서 배경 -->              
@@ -150,20 +165,21 @@
       </div>
 
       <!-- 3. Content Area (Middle row, Right column) -->
-      <div class="p-4 flex flex-col justify-end items-end">
+      <div class="p-4 flex flex-col justify-end items-end mobile-content-right">
         <div class="text-right">
-          <div class="flex flex-col items-end w-full">
-            <h1 class="text-8xl font-medium leading-none self-start">Meet</h1>
-            <h1 class="text-8xl font-medium leading-none mt-2">Verita AI</h1>
+          <!-- 헤더와 동일한 폰트(serif) 적용: 히어로 타이틀 전용 -->
+          <div class="flex flex-col items-end w-full font-serif">
+            <h1 class="text-8xl font-medium leading-none self-start mobile-title">Meet</h1>
+            <h1 class="text-8xl font-medium leading-none mt-2 mobile-title">Verita AI</h1>
           </div>
-          <p class="text-lg max-w-md mt-8 leading-relaxed">
+          <p class="text-lg max-w-md mt-8 leading-relaxed mobile-description">
             Verita AI는 <span class="text-[#E86A33] font-semibold">기존 특허 번역 대비 95% 이상 빠른 속도</span>와 <span class="text-[#E86A33] font-semibold">50% 이상 저렴한 가격</span>, 그리고 일반 AI 번역을 압도하는 <span class="text-[#E86A33] font-semibold">법률적 정확성</span>을 제공합니다. 대폭 단축된 업무 시간과 귀사의 소중한 지적 재산권을 완벽하게 보호하는 특허 번역의 <span class="text-[#E86A33]">새로운 기준</span>을 경험하세요.
           </p>
         </div>
       </div>
 
       <!-- 4. Footer Area (Bottom row) -->
-      <footer class="col-span-2 grid grid-cols-2 items-center py-4 border-t border-dotted border-[#D6C6B4]">
+      <footer class="col-span-2 grid grid-cols-2 items-center py-4 border-t border-dotted border-[#D6C6B4] mobile-footer-grid">
           <div class="p-4"></div>
           <div class="p-4 flex items-center justify-end">
               <span class="text-xs font-bold tracking-widest">SCROLL DOWN</span>
@@ -173,39 +189,17 @@
     </div>
   </section>
 
-          <!-- 마지막 섹션: 호출 영역 -->
-          <div class="bg-[#F5EFE6] py-24 sm:py-32">
-            <div class="w-full max-w-7xl mx-auto text-center px-6 lg:px-8">
-              <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-                지금 바로 <span class="text-[#E86A33]">Verita AI</span>의 혁신을 경험하세요
-              </h2>
-                <p class="mt-6 text-lg leading-8 text-gray-700 max-w-3xl mx-auto">
-                  사업자 고객이라면 누구나 Verita AI의 압도적인 번역 품질을 확인하실 수 있도록,
-                  <br>
-                  <span class="font-bold text-gray-900">특허 번역 2건을 무료로 체험하세요.</span>
-                </p>
-              <div class="mt-10 flex items-center justify-center gap-x-6">
-                <!-- 클릭 시 이메일 주소를 클립보드로 복사합니다. 컨트롤러: copy-to-clipboard -->
-                <a href="#"
-                   data-controller="copy-to-clipboard"
-                   data-action="click->copy-to-clipboard#copy"
-                   data-copy-to-clipboard-email-value="contact@verita-ai.example"
-                   class="rounded-md bg-[#E86A33] px-8 py-4 text-lg font-semibold text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500 transition duration-300 ease-in-out transform hover:scale-105">
-                  <span data-copy-to-clipboard-target="label">무료 번역 시작하기</span>
-                </a>
-              </div>
-            </div>
-          </div>
+          
 
   <!-- 가격 정책 섹션: 아래 블록은 제공된 마케팅 카피의 "ROI 및 가격 정책" 내용을 반영하여 작성되었습니다. -->
-  <div id="pricing" class="bg-[#F5EFE6] py-20 border-t border-dotted border-[#D6C6B4]">
-    <div class="w-full max-w-7xl mx-auto px-4">
-      <h2 class="text-4xl font-light text-center mb-4">ROI 및 <span class="text-[#E86A33] font-medium">가격 정책</span></h2>
-      <p class="text-center text-gray-600 mb-12">100페이지 기준 비용 비교와 초기 고객 특별가 안내</p>
+  <div id="pricing" class="bg-[#F5EFE6] py-20 border-t border-dotted border-[#D6C6B4] mobile-section-padding">
+    <div class="w-full max-w-7xl mx-auto px-4 mobile-container-padding">
+      <h2 class="text-4xl font-light text-center mb-4 mobile-heading-xl">AI와 전문가의 협업, <span class="text-[#E86A33] font-medium">비용과 시간의 혁신</span></h2>
+      <p class="text-center text-gray-600 mb-12 mobile-description">100페이지/400단어 기준 비용 비교와 초기 고객 특별가 안내</p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mobile-card-grid">
         <!-- 비용 비교 카드 -->
-        <div class="bg-white/60 rounded-xl p-8 border border-gray-200">
+        <div class="bg-white/50 rounded-xl p-8 border border-gray-200">
           <h3 class="text-xl font-semibold mb-4">기존 방식 대비 비용 분석 (100페이지)</h3>
           <ul class="space-y-3 text-gray-700">
             <li>• 전문가 팀: <strong>3~400만원</strong> + 7일 + 추가 대응 어려움</li>
@@ -215,16 +209,16 @@
 
           <div class="mt-6 p-4 bg-[#fff7f3] border border-[#fde1d6] rounded-lg text-sm text-gray-700">
             <p class="font-medium">특별 혜택</p>
-            <p>• 구매하신 페이지수만큼 <strong>1+1 보너스</strong> (최대 200페이지)</p>
+            <p>• 유료 진행하신 페이지수만큼 <strong>1+1 보너스</strong> (최대 200페이지)</p>
             <p>• <strong>3개월 내 100% 환불 보장</strong> (불만족시)</p>
           </div>
         </div>
 
         <!-- ROI 카드 -->
-        <div class="bg-white/60 rounded-xl p-8 border border-gray-200">
+        <div class="bg-white/50 rounded-xl p-8 border border-gray-200">
           <h3 class="text-xl font-semibold mb-4">투자 대비 수익(ROI)</h3>
           <ul class="space-y-3 text-gray-700">
-            <li>• 시간 절약: <strong>7일 → 3시간</strong> (95% 단축)</li>
+            <li>• 시간 절약: 7일 → <strong>3시간</strong> (95% 단축)</li>
             <li>• 비용 절감: <strong>50% 직접 절감</strong> + 검수 시간 및 리스크 축소</li>
             <li>• 기회비용: 긴급건 대응 가능</li>
             <li>• 품질 보장: <strong>3개월 내 100% 환불 보장</strong></li>
@@ -246,34 +240,129 @@
     </div>
   </div>
 
+  <!-- 실제 사용 사례 섹션 -->
+  <div class="bg-[#F5EFE6] py-20 border-t border-dotted border-[#D6C6B4] mobile-section-padding">
+    <div class="w-full max-w-5xl mx-auto px-4 mobile-container-padding">
+      <h2 class="text-4xl font-light text-center mb-4 mobile-heading-xl">
+        이런 순간, <span class="text-[#E86A33] font-medium">Verita AI가 필요했습니다</span>
+      </h2>
+      <p class="text-center text-gray-600 mb-16 mobile-description">
+        변리사님들이 실제로 경험하는 상황별 Verita AI 솔루션
+      </p>
+
+      <div class="space-y-12">
+        <!-- Case 1: 긴급 번역 -->
+        <div class="bg-gradient-to-r from-[#F5EFE6] to-white rounded-xl p-8 border border-gray-200 shadow-sm">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 mt-1 mr-4">
+              <div class="w-8 h-8 bg-[#E86A33] rounded-full flex items-center justify-center text-white font-bold text-sm">
+                1
+              </div>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-semibold text-[#4A403A] mb-4">
+                금요일 오후, 갑자기 발생한 긴급 번역/수정 요청
+              </h3>
+              <p class="text-gray-700 leading-relaxed mb-4">
+                클라이언트의 긴급 요청이나 OA 대응을 위한 급한 수정이 필요할 때, 기존 전문가 팀으로는 대응이 불가능했습니다. 
+                결국 변리사님이 주말을 반납해야 했지만, Verita AI는 <strong class="text-[#E86A33]">단 3시간 만에 전문가급 결과물</strong>로 
+                변리사님의 주말을 지켜드립니다.
+              </p>
+              <div class="inline-flex items-center px-4 py-2 bg-[#fff7f3] border border-[#fde1d6] rounded-lg text-sm text-[#E86A33] font-medium">
+                💡 주말 반납 → 3시간 해결
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Case 2: 대규모 번역 -->
+        <div class="bg-gradient-to-r from-white to-[#F5EFE6] rounded-xl p-8 border border-gray-200 shadow-sm">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 mt-1 mr-4">
+              <div class="w-8 h-8 bg-[#E86A33] rounded-full flex items-center justify-center text-white font-bold text-sm">
+                2
+              </div>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-semibold text-[#4A403A] mb-4">
+                수만 페이지에 달하는 대규모 선행 기술 자료 번역
+              </h3>
+              <p class="text-gray-700 leading-relaxed mb-4">
+                미래의 AI 검색 기술 고도화에 대비하기 위해, 혹은 대규모 분쟁에서 핵심 증거를 찾기 위해 방대한 자료의 번역이 필요할 때가 있습니다. 
+                현실적으로 수백, 수천만 원의 비용 때문에 전문가 번역을 맡기는 것은 불가능했습니다. 
+                Verita AI는 <strong class="text-[#E86A33]">합리적인 비용으로 대규모 번역</strong>을 신속하게 처리하여 미래를 대비할 수 있게 합니다.
+              </p>
+              <div class="inline-flex items-center px-4 py-2 bg-[#fff7f3] border border-[#fde1d6] rounded-lg text-sm text-[#E86A33] font-medium">
+                📊 수천만원 → 합리적 비용
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Case 3: 검수 시간 단축 -->
+        <div class="bg-gradient-to-r from-[#F5EFE6] to-white rounded-xl p-8 border border-gray-200 shadow-sm">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 mt-1 mr-4">
+              <div class="w-8 h-8 bg-[#E86A33] rounded-full flex items-center justify-center text-white font-bold text-sm">
+                3
+              </div>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-semibold text-[#4A403A] mb-4">
+                번역 검수 시간을 줄여 핵심 전략에 집중하고 싶을 때
+              </h3>
+              <p class="text-gray-700 leading-relaxed mb-4">
+                모든 변리사님들의 희망 사항은 번거로운 검수 시간을 줄이고 고객의 발명을 보호하는 데 집중하는 것입니다. 
+                Verita AI는 변리사가 설계한 7단계 검증 시스템을 통해 <strong class="text-[#E86A33]">검토 업무를 90%까지 감소</strong>시켜, 
+                변리사님이 가장 중요한 일에 집중할 수 있는 환경을 만들어 드립니다.
+              </p>
+              <div class="inline-flex items-center px-4 py-2 bg-[#fff7f3] border border-[#fde1d6] rounded-lg text-sm text-[#E86A33] font-medium">
+                ⚡ 검수 시간 90% 감소
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- 나머지 섹션들: 스크롤로 확인 -->
-  <div class="container mx-auto max-w-none px-5 md:px-8 lg:px-12 xl:px-16">
+  <div class="container mx-auto max-w-none px-5 md:px-8 lg:px-12 xl:px-16 mobile-container-padding">
     <!-- 비용 및 시간 절감 섹션 -->
-    <div class="py-20 border-b border-dotted border-[#D6C6B4]">
-      <div class="w-full max-w-7xl mx-auto px-4 text-center">
-        <h2 class="text-4xl font-light mb-6">AI와 전문가의 협업, <span class="text-[#E86A33] font-medium">비용과 시간의 혁신</span></h2>
-        <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
-          멀티 AI 에이전트의 초벌 번역과 전문 인력의 최종 검수를 통해, 번역 품질은 유지하면서 비용은 50% 이상, 소요 시간은 95% 이상 획기적으로 절감했습니다.
+    <div class="py-20 border-b border-dotted border-[#D6C6B4] mobile-section-padding">
+      <div class="w-full max-w-7xl mx-auto px-4 text-center mobile-container-padding">
+        <h2 class="text-4xl font-light mb-6 mobile-heading-xl">베리타 AI의 <span class="text-[#E86A33] font-medium">핵심 서비스</span></h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed mobile-description">
+          멀티 AI 에이전트의 다중 검증 과정을 통해, 번역 품질은 유지하면서 비용은 50% 이상, 소요 시간은 95% 이상 획기적으로 절감했습니다.
         </p>
-        <div class="flex flex-wrap justify-center gap-8">
+        <div class="flex flex-wrap justify-center gap-8 mobile-card-grid">
           <div class="bg-white/50 p-8 rounded-lg border border-gray-200 w-80">
-            <h3 class="text-2xl font-semibold text-[#4A403A] mb-2">비용 50% 이상 절감</h3>
-            <p class="text-gray-600">AI 기반 자동화로 불필요한 수작업을 최소화하여 합리적인 비용을 제공합니다.</p>
+            <h3 class="text-2xl font-semibold text-[#4A403A] mb-2">일반 번역</h3>
+            <!-- '(오픈 특가)' 문구를 별도 줄로 분리하여 가독성 개선 -->
+            <p class="text-gray-600">페이지(400단어 기준)당 9,900원. 첫 유료결제만큼 1+1 무료 제공.</p>
           </div>
           <div class="bg-white/50 p-8 rounded-lg border border-gray-200 w-80">
-            <h3 class="text-2xl font-semibold text-[#4A403A] mb-2">시간 95% 이상 단축</h3>
-            <p class="text-gray-600">24시간 가동되는 AI 시스템이 신속하게 초안을 완성하여 최종 납기일을 앞당깁니다.</p>
+            <h3 class="text-2xl font-semibold text-[#4A403A] mb-2">초급속 번역</h3>
+            <p class="text-gray-600">매우 급한 번역건을 1시간안에 더 빠르게 받아보세요. (20% 추가비용)</p>
+          </div>
+          <!-- 신규 카드: 거절이유 통지서 전용 번역 -->
+          <div class="bg-white/50 p-8 rounded-lg border border-gray-200 w-80">
+            <h3 class="text-2xl font-semibold text-[#4A403A] mb-2">거절이유 통지서 번역</h3>
+            <p class="text-gray-600">국내 거절이유 통지서와 특허 원문을 함께 분석하여 정확한 원인을 해당 언어로 최종 납품.</p>
           </div>
         </div>
       </div>
     </div>
 
     <!-- 이미지 비교 기능 섹션 -->
-    <div class="py-20 border-b border-dotted border-[#D6C6B4] bg-gradient-to-b from-white to-[#faf9f7]">
-      <div class="w-full max-w-7xl mx-auto px-4">
+    <div class="py-20 border-b border-dotted border-[#D6C6B4] bg-gradient-to-b from-white to-[#faf9f7] mobile-section-padding">
+      <div class="w-full max-w-7xl mx-auto px-4 mobile-container-padding">
         <div class="text-center mb-16">
-          <h2 class="text-4xl font-light mb-6">번역 품질의 <span class="text-[#E86A33] font-medium">차이를 직접 확인하세요</span></h2>
-          <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4 mobile-heading-xl" style="padding-top: 30px;">
+            번역 품질의 <span class="text-[#E86A33] font-medium">차이를 직접 확인하세요</span>
+          </h2>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed mobile-description">
             마우스를 올려보세요. 일반 번역과 VERITA AI 번역의 차이를 실시간으로 비교할 수 있습니다.
           </p>
         </div>
@@ -281,7 +370,7 @@
         <!-- 이미지 비교 컨테이너 -->
         <div 
           id="image-compare-container"
-          class="relative max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden"
+          class="relative max-w-3xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden mobile-image-compare"
         >
           <!-- 기본 이미지 (번역 후) -->
           <img 
@@ -290,13 +379,25 @@
             class="w-full h-auto block object-contain"
             alt="번역 후 문서"
           />
+
+          <!-- 기본(오른쪽) 텍스트 문서 컨테이너: 영문 번역본을 텍스트로 표시 -->
+          <!-- 주의: 비교 스크립트 호환을 위해 after-image는 유지하되, 실제 표시 역할은 아래 텍스트가 담당 -->
+          <div class="absolute inset-0 bg-white text-gray-800 font-sans text-[13px] sm:text-sm leading-relaxed p-6">
+            <%# 영문 청구항/설명 샘플 (가독성을 위해 partial 분리) %>
+            <%= render 'home/overlay_english_claims' %>
+          </div>
           
           <!-- 오버레이 (번역 전 이미지 영역) - 세로 절반 분할 -->
           <div 
             id="overlay"
             class="absolute top-0 left-0 pointer-events-none overflow-hidden"
-            style="opacity: 1; background-repeat: no-repeat; height: 100%; width: 50%; border-right: 3px solid #E86A33;"
+            style="opacity: 1; height: 100%; width: 100%; border-right: 3px solid #E86A33; clip-path: inset(0 50% 0 0);"
           >
+            <!-- 텍스트 문서 모드: 흰 배경 + 패딩 + 가독성 향상을 위한 라인하이트/폰트 크기 설정 -->
+            <div class="w-full h-full bg-white text-gray-800 font-sans text-[13px] sm:text-sm leading-relaxed p-6">
+              <%# 한국어 청구항 샘플 (길이가 길어 partial 분리) %>
+              <%= render 'home/overlay_korean_claims' %>
+            </div>
             <!-- 오버레이 라벨 -->
             <div class="absolute top-4 right-4 bg-[#4A403A] text-white text-sm px-3 py-2 rounded shadow-lg">
               원본
@@ -313,9 +414,12 @@
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-[#E86A33] rounded-full shadow-lg border-2 border-white"></div>
             
             <!-- VERITA AI 번역 라벨 (분할선 상단 우측) -->
+            <!-- 라벨 제거 요청에 따라 숨김 처리 -->
+            <!--
             <div class="absolute top-2 left-6 bg-[#E86A33] text-white text-xs font-bold px-2 py-1 rounded-full shadow-xl border-2 border-white whitespace-nowrap z-20">
               AI번역
             </div>
+            -->
           </div>
           
         </div>
@@ -324,13 +428,12 @@
         <div class="mt-8 text-center">
           <p class="text-sm text-gray-500 max-w-2xl mx-auto">
             왼쪽은 일반 번역, 오른쪽은 VERITA AI의 전문 번역 결과입니다. 
-            전문 용어의 정확성과 문맥 이해도의 차이를 확인해보세요.
           </p>
         </div>
         
         <!-- 중국어 번역 비교 -->
         <div class="text-center mb-12" style="margin-top: 70px;">
-          <h2 class="text-4xl font-bold text-gray-900 mb-4" style="padding-top: 30px;">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4 mobile-heading-xl" style="padding-top: 30px;">
             중국어 번역 품질 비교
           </h2>
         </div>
@@ -338,7 +441,7 @@
         <!-- 이미지 비교 컨테이너 -->
         <div 
           id="chinese-compare-container"
-          class="relative max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden"
+          class="relative max-w-3xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden mobile-image-compare"
         >
           <!-- 기본 이미지 (중국어 번역 후) -->
           <img 
@@ -348,12 +451,24 @@
             alt="중국어 번역 후 문서"
           />
           
-          <!-- 오버레이 (번역 전 이미지 영역) - 세로 절반 분할 -->
+          <!-- 기본(오른쪽) 텍스트 문서 컨테이너: 중국어 번역본을 텍스트로 표시 -->
+          <!-- 주의: 비교 스크립트 호환을 위해 after-image는 유지하되, 실제 표시 역할은 아래 텍스트가 담당 -->
+          <div class="absolute inset-0 bg-white text-gray-800 font-sans text-[13px] sm:text-sm leading-relaxed p-6">
+            <%# 중국어 번역본(권利要求書/说明书) 텍스트 partial 렌더링 %>
+            <%= render 'home/overlay_chinese_claims' %>
+          </div>
+          
+          <!-- 오버레이 (원문 텍스트 영역) - clip-path로 세로 절반 분할, 텍스트 재래핑 방지 -->
           <div 
             id="chinese-overlay"
             class="absolute top-0 left-0 pointer-events-none overflow-hidden"
-            style="opacity: 1; background-repeat: no-repeat; height: 100%; width: 50%; border-right: 3px solid #E86A33;"
+            style="opacity: 1; height: 100%; width: 100%; border-right: 3px solid #E86A33; clip-path: inset(0 50% 0 0);"
           >
+            <!-- 텍스트 문서 모드: 흰 배경 + 가독성 타이포그래피 -->
+            <div class="w-full h-full bg-white text-gray-800 font-sans text-[13px] sm:text-sm leading-relaxed p-6">
+              <%# 중국어 비교 섹션 전용 원문(한국어) 텍스트 렌더링 %>
+              <%= render 'home/overlay_korean_chinese_original' %>
+            </div>
             <!-- 오버레이 라벨 -->
             <div class="absolute top-4 right-4 bg-[#4A403A] text-white text-sm px-3 py-2 rounded shadow-lg">
               원본
@@ -370,9 +485,12 @@
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-[#E86A33] rounded-full shadow-lg border-2 border-white"></div>
             
             <!-- VERITA AI 번역 라벨 (분할선 상단 우측) -->
+            <!-- 라벨 제거 요청에 따라 숨김 처리 -->
+            <!--
             <div class="absolute top-2 left-6 bg-[#E86A33] text-white text-xs font-bold px-2 py-1 rounded-full shadow-xl border-2 border-white whitespace-nowrap z-20">
               AI중국어
             </div>
+            -->
           </div>
           
         </div>
@@ -381,7 +499,6 @@
         <div class="mt-8 text-center">
           <p class="text-sm text-gray-500 max-w-2xl mx-auto">
             왼쪽은 일반 번역, 오른쪽은 VERITA AI의 전문 중국어 번역 결과입니다. 
-            한자 표현과 문화적 맥락의 차이를 확인해보세요.
           </p>
         </div>
         
@@ -395,7 +512,7 @@
         <!-- 이미지 비교 컨테이너 -->
         <div 
           id="japanese-compare-container"
-          class="relative max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden"
+          class="relative max-w-3xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden"
         >
           <!-- 기본 이미지 (일본어 번역 후) -->
           <img 
@@ -405,12 +522,24 @@
             alt="일본어 번역 후 문서"
           />
           
-          <!-- 오버레이 (번역 전 이미지 영역) - 세로 절반 분할 -->
+          <!-- 기본(오른쪽) 텍스트 문서 컨테이너: 일본어 번역본을 텍스트로 표시 -->
+          <!-- 주의: 비교 스크립트 호환을 위해 after-image는 유지하되, 실제 표시 역할은 아래 텍스트가 담당 -->
+          <div class="absolute inset-0 bg-white text-gray-800 font-sans text-[13px] sm:text-sm leading-relaxed p-6">
+            <%# 일본어 번역본(特許請求の範囲/発明の名称/技術分野/背景技術) 텍스트 partial 렌더링 %>
+            <%= render 'home/overlay_japanese_claims' %>
+          </div>
+          
+          <!-- 오버레이 (원문 텍스트 영역) - clip-path로 세로 절반 분할, 텍스트 재래핑 방지 -->
           <div 
             id="japanese-overlay"
             class="absolute top-0 left-0 pointer-events-none overflow-hidden"
-            style="opacity: 1; background-repeat: no-repeat; height: 100%; width: 50%; border-right: 3px solid #E86A33;"
+            style="opacity: 1; height: 100%; width: 100%; border-right: 3px solid #E86A33; clip-path: inset(0 50% 0 0);"
           >
+            <!-- 텍스트 문서 모드: 흰 배경 + 가독성 타이포그래피 -->
+            <div class="w-full h-full bg-white text-gray-800 font-sans text-[13px] sm:text-sm leading-relaxed p-6">
+              <%# 일본어 비교 섹션의 원문(한국어) 텍스트: 중국어 섹션과 동일한 원문 사용 %>
+              <%= render 'home/overlay_korean_chinese_original' %>
+            </div>
             <!-- 오버레이 라벨 -->
             <div class="absolute top-4 right-4 bg-[#4A403A] text-white text-sm px-3 py-2 rounded shadow-lg">
               원본
@@ -427,9 +556,12 @@
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-[#E86A33] rounded-full shadow-lg border-2 border-white"></div>
             
             <!-- VERITA AI 번역 라벨 (분할선 상단 우측) -->
+            <!-- 라벨 제거 요청에 따라 숨김 처리 -->
+            <!--
             <div class="absolute top-2 left-6 bg-[#E86A33] text-white text-xs font-bold px-2 py-1 rounded-full shadow-xl border-2 border-white whitespace-nowrap z-20">
               AI일본어
             </div>
+            -->
           </div>
           
         </div>
@@ -438,7 +570,6 @@
         <div class="mt-8 text-center">
           <p class="text-sm text-gray-500 max-w-2xl mx-auto">
             왼쪽은 일반 번역, 오른쪽은 VERITA AI의 전문 일본어 번역 결과입니다. 
-            경어 표현과 기술 용어의 정확성 차이를 확인해보세요.
           </p>
         </div>
 
@@ -448,13 +579,14 @@
         console.log('Image compare script loaded - vertical split mode with 50% default');
         
         // 영어 번역 비교
-        setupImageComparison('image-compare-container', 'overlay', 'divider', 'after-image', '/assets/images/before_translation.png');
+        // 텍스트 모드 비교: before 이미지 사용 안 함 (빈 값 전달)
+        setupImageComparison('image-compare-container', 'overlay', 'divider', 'after-image', '');
         
-        // 중국어 번역 비교
-        setupImageComparison('chinese-compare-container', 'chinese-overlay', 'chinese-divider', 'chinese-after-image', '/assets/images/before_translation.png');
+        // 중국어 번역 비교 (텍스트 모드: before 이미지 사용 안 함)
+        setupImageComparison('chinese-compare-container', 'chinese-overlay', 'chinese-divider', 'chinese-after-image', '');
         
-        // 일본어 번역 비교
-        setupImageComparison('japanese-compare-container', 'japanese-overlay', 'japanese-divider', 'japanese-after-image', '/assets/images/before_translation.png');
+        // 일본어 번역 비교 (텍스트 모드: before 이미지 사용 안 함)
+        setupImageComparison('japanese-compare-container', 'japanese-overlay', 'japanese-divider', 'japanese-after-image', '');
       });
 
       // 이미지 비교 기능 설정 함수
@@ -469,13 +601,21 @@
           return;
         }
         
-        // 초기 설정 - 50% 분할로 시작
+        // 초기 설정 - 50% 분할로 시작 (clip-path로 잘라내 가시 영역만 변경)
         function initializeComparison() {
           const rect = container.getBoundingClientRect();
-          overlay.style.backgroundImage = `url(${beforeImageSrc})`;
-          overlay.style.backgroundPosition = '0 0';
-          overlay.style.backgroundSize = `${rect.width}px ${rect.height}px`;
-          overlay.style.backgroundRepeat = 'no-repeat';
+          // 이미지 모드일 때만 배경 이미지를 설정 (텍스트 모드는 배경 이미지 미사용)
+          if (beforeImageSrc) {
+            overlay.style.backgroundImage = `url(${beforeImageSrc})`;
+            overlay.style.backgroundPosition = '0 0';
+            overlay.style.backgroundSize = `${rect.width}px ${rect.height}px`;
+            overlay.style.backgroundRepeat = 'no-repeat';
+          } else {
+            overlay.style.backgroundImage = '';
+          }
+          // clip-path 기준값 초기화 (우측을 잘라내어 50%만 표시)
+          overlay.style.clipPath = 'inset(0 50% 0 0)';
+          container.dataset.lastPosition = '50';
           console.log(`Initialized ${containerId} with 50% split`);
         }
         
@@ -500,24 +640,33 @@
           // 마우스 X 좌표를 퍼센트로 변환 (0% ~ 100%)
           const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
           
-          // 오버레이 너비를 마우스 위치에 따라 조정
-          overlay.style.width = percentage + '%';
+          // 오버레이는 항상 전체 폭 유지, 가시 영역만 clip-path로 자름
+          // 우측이 잘려 나가도록 (0 100%-percentage 0 0)
+          overlay.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
           
           // 분할선 위치 조정
           divider.style.left = percentage + '%';
           
-          // 배경 이미지 설정 (번역 전 이미지)
-          overlay.style.backgroundImage = `url(${beforeImageSrc})`;
-          overlay.style.backgroundPosition = '0 0';
-          overlay.style.backgroundSize = `${rect.width}px ${rect.height}px`;
-          overlay.style.backgroundRepeat = 'no-repeat';
+          // 배경 이미지 설정 (이미지 모드일 때만). 텍스트 모드에서는 미설정
+          if (beforeImageSrc) {
+            overlay.style.backgroundImage = `url(${beforeImageSrc})`;
+            overlay.style.backgroundPosition = '0 0';
+            overlay.style.backgroundSize = `${rect.width}px ${rect.height}px`;
+            overlay.style.backgroundRepeat = 'no-repeat';
+          }
+          
+          // 현재 위치를 저장 (마우스가 컨테이너를 벗어났을 때 사용)
+          container.dataset.lastPosition = percentage;
         });
         
-        // 마우스 이탈 - 50%로 복귀
+        // 마우스 이탈 시 현재 위치 유지 (50%로 복귀하지 않음)
         container.addEventListener('mouseleave', function() {
-          console.log(`Mouse left ${containerId} - returning to 50% split`);
-          overlay.style.width = '50%';
-          divider.style.left = '50%';
+          console.log(`Mouse left ${containerId} - maintaining current position`);
+          // 현재 위치 유지 - 50%로 복귀하지 않음
+          const lastPosition = container.dataset.lastPosition || '50';
+          // 마지막 위치 유지 (clip-path로 고정)
+          overlay.style.clipPath = `inset(0 ${100 - lastPosition}% 0 0)`;
+          divider.style.left = lastPosition + '%';
           divider.style.transform = 'scaleY(1)';
         });
         
@@ -528,51 +677,51 @@
       }
     </script>
 
-    <div class="py-20 border-b border-dotted border-[#D6C6B4]">
-      <div class="w-full max-w-7xl mx-auto px-4 text-center">
-        <h2 class="text-4xl font-light mb-6">10만 개 이상의 <span class="text-[#E86A33] font-medium">특허 전문 용어</span></h2>
-        <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
+    <div class="py-20 border-b border-dotted border-[#D6C6B4] mobile-section-padding">
+      <div class="w-full max-w-7xl mx-auto px-4 text-center mobile-container-padding">
+        <h2 class="text-4xl font-light mb-6 mobile-heading-xl">10만 개 이상의 <span class="text-[#E86A33] font-medium">특허 전문 용어</span></h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed mobile-description">
           바이오, IT, 기계, 화학 등 분야별로 특화된 용어집을 구축하고 실시간으로 업데이트합니다. 고객 맞춤형 용어 사전을 제공하여 일관된 번역 품질을 보장합니다.
         </p>
-        <div class="flex flex-wrap justify-center gap-4">
-          <span class="px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition">바이오 의학</span>
-          <span class="px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition">IT 기술</span>
-          <span class="px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition">기계 공학</span>
-          <span class="px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition">화학 공정</span>
-          <span class="px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition">전자 공학</span>
-          <span class="px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition">재료 과학</span>
+        <div class="flex flex-wrap justify-center gap-4 mobile-tag-grid">
+          <span class="px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition mobile-tag">바이오 의학</span>
+          <span class="px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition mobile-tag">IT 기술</span>
+          <span class="px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition mobile-tag">기계 공학</span>
+          <span class="px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition mobile-tag">화학 공정</span>
+          <span class="px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition mobile-tag">전자 공학</span>
+          <span class="px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition mobile-tag">재료 과학</span>
         </div>
       </div>
     </div>
 
-    <div class="py-20 border-b border-dotted border-[#D6C6B4]">
-      <div class="w-full max-w-7xl mx-auto px-4 text-center">
-        <h2 class="text-4xl font-light mb-6">국가별 법률 및 언어에 <span class="text-[#E86A33] font-medium">최적화된 에이전트</span></h2>
-        <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
+    <div class="py-20 border-b border-dotted border-[#D6C6B4] mobile-section-padding">
+      <div class="w-full max-w-7xl mx-auto px-4 text-center mobile-container-padding">
+        <h2 class="text-4xl font-light mb-6 mobile-heading-xl">국가별 법률 및 언어에 <span class="text-[#E86A33] font-medium">최적화된 에이전트</span></h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed mobile-description">
           미국, 일본, 중국, 베트남, 인도 등 주요 국가의 특허 시스템과 법률, 언어적 뉘앙스까지 완벽하게 이해하는 국가별 전문 에이전트가 번역을 수행하여 현지화된 최상의 결과물을 제공합니다.
         </p>
-        <div class="flex flex-wrap justify-center gap-4">
-          <span class="inline-flex items-center px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition">
+        <div class="flex flex-wrap justify-center gap-4 mobile-tag-grid">
+          <span class="inline-flex items-center px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition mobile-tag">
             <span class="fi fi-us mr-2"></span>
             <span>미국 (USPTO)</span>
           </span>
-          <span class="inline-flex items-center px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition">
+          <span class="inline-flex items-center px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition mobile-tag">
             <span class="fi fi-jp mr-2"></span>
             <span>일본 (JPO)</span>
           </span>
-          <span class="inline-flex items-center px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition">
+          <span class="inline-flex items-center px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition mobile-tag">
             <span class="fi fi-cn mr-2"></span>
             <span>중국 (CNIPA)</span>
           </span>
-          <span class="inline-flex items-center px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition">
+          <span class="inline-flex items-center px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition mobile-tag">
             <span class="fi fi-vn mr-2"></span>
             <span>베트남 (IP Viet Nam)</span>
           </span>
-          <span class="inline-flex items-center px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition">
+          <span class="inline-flex items-center px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition mobile-tag">
             <span class="fi fi-in mr-2"></span>
             <span>인도 (IPO)</span>
           </span>
-          <span class="inline-flex items-center px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition">
+          <span class="inline-flex items-center px-6 py-2 border border-[#E86A33] rounded-full text-[#E86A33] font-medium bg-[#F5EFE6] hover:bg-opacity-50 transition mobile-tag">
             <span class="fi fi-eu mr-2"></span>
             <span>유럽 (EPO)</span>
           </span>
@@ -581,12 +730,12 @@
     </div>
 
     <!-- 두 번째 섹션: 번역 프로세스 -->
-    <div class="py-20 border-b border-dotted border-[#D6C6B4]">
-      <h2 class="text-4xl font-light text-center mb-16">7단계 <span class="text-[#E86A33] font-medium">정밀 번역</span> 프로세스</h2>
+    <div class="py-20 border-b border-dotted border-[#D6C6B4] mobile-section-padding">
+      <h2 class="text-4xl font-light text-center mb-16 mobile-heading-xl">7단계 <span class="text-[#E86A33] font-medium">정밀 번역</span> 프로세스</h2>
       
       <!-- 프로세스 타임라인 -->
-      <div class="w-full max-w-7xl mx-auto">
-        <div class="flex flex-wrap -mx-4">
+      <div class="w-full max-w-7xl mx-auto mobile-container-padding">
+        <div class="flex flex-wrap -mx-4 mobile-card-grid">
           <!-- 프로세스 1-4 (좌측) -->
           <div class="w-full md:w-1/2 px-4">
             <div class="relative pl-16 pb-12">
@@ -594,8 +743,9 @@
                 <span class="font-bold text-[#4A403A]">01</span>
               </div>
               <div>
-                <h3 class="text-xl font-medium mb-2">AI 문서 분석</h3>
-                <p class="text-sm opacity-75 leading-relaxed">베리타 AI가 문서의 특성을 파악해서 문서의 전문 분야를 자동으로 분류하고, 특허 문서의 구조와 핵심 기술 요소를 정밀하게 분석합니다.</p>
+                <!-- 1단계: USPTO 심사관 AI -->
+                <h3 class="text-xl font-medium mb-2">USPTO 심사관 AI</h3>
+                <p class="text-sm opacity-75 leading-relaxed">CPC 분류 자동 파악, 발명의 핵심 파악, 기술분야 특정으로 번역 전 전략의 뼈대를 설정합니다.</p>
               </div>
               <div class="absolute left-5 top-12 bottom-0 border-l border-dashed border-[#D6C6B4]"></div>
             </div>
@@ -605,8 +755,9 @@
                 <span class="font-bold text-[#4A403A]">02</span>
               </div>
               <div>
-                <h3 class="text-xl font-medium mb-2">멀티에이전트 전문 분석</h3>
-                <p class="text-sm opacity-75 leading-relaxed">멀티 에이전트가 해당 분야의 전문성을 분석하여 치밀하게 짜여진 베리타 AI의 분석 워크플로우를 통해 특허 문서의 전문적 맥락을 파악합니다.</p>
+                <!-- 2단계: 법률 분석가 AI -->
+                <h3 class="text-xl font-medium mb-2">법률 분석가 AI</h3>
+                <p class="text-sm opacity-75 leading-relaxed">청구항 위험요소 추출, 권리범위에 영향 주는 용어 식별, Negative Limitation 발견으로 법적 리스크를 사전 차단합니다.</p>
               </div>
               <div class="absolute left-5 top-12 bottom-0 border-l border-dashed border-[#D6C6B4]"></div>
             </div>
@@ -616,8 +767,9 @@
                 <span class="font-bold text-[#4A403A]">03</span>
               </div>
               <div>
-                <h3 class="text-xl font-medium mb-2">AI 1차 번역</h3>
-                <p class="text-sm opacity-75 leading-relaxed">분야별 특화된 AI 번역 모델이 10만 개 이상의 전문 용어 데이터베이스를 활용하여 1차 번역을 완료하고 용어 일관성을 확보합니다.</p>
+                <!-- 3단계: 용어 전략가 AI -->
+                <h3 class="text-xl font-medium mb-2">용어 전략가 AI</h3>
+                <p class="text-sm opacity-75 leading-relaxed">문서 전용 용어사전 생성, 동사·형용사 번역 규칙 수립, 일관성 매트릭스 구축으로 용어 정책을 확정합니다.</p>
               </div>
               <div class="absolute left-5 top-12 bottom-0 border-l border-dashed border-[#D6C6B4]"></div>
             </div>
@@ -627,8 +779,9 @@
                 <span class="font-bold text-[#4A403A]">04</span>
               </div>
               <div>
-                <h3 class="text-xl font-medium mb-2">AI 최종 검수</h3>
-                <p class="text-sm opacity-75 leading-relaxed">최종 AI 검수 시스템이 번역 결과물을 원문과 대조하여 정확성을 검증하고 용어 일관성과 문맥 적합성을 정밀하게 확인합니다.</p>
+                <!-- 4단계: 컨텍스트 보존 AI -->
+                <h3 class="text-xl font-medium mb-2">컨텍스트 보존 AI</h3>
+                <p class="text-sm opacity-75 leading-relaxed">문장 분할 시 의미 단위 보존, 전후 문맥 연속성 유지, 참조 관계 매핑으로 문맥 단절을 방지합니다.</p>
               </div>
             </div>
           </div>
@@ -640,8 +793,9 @@
                 <span class="font-bold text-[#4A403A]">05</span>
               </div>
               <div>
-                <h3 class="text-xl font-medium mb-2">법적 검토</h3>
-                <p class="text-sm opacity-75 leading-relaxed">특허법 전문가가 권리 범위와 법적 표현의 정확성을 검증합니다.</p>
+                <!-- 5단계: 정밀 번역 AI -->
+                <h3 class="text-xl font-medium mb-2">정밀 번역 AI</h3>
+                <p class="text-sm opacity-75 leading-relaxed">용어사전 100% 준수, 분야별 최적 표현 선택, 법적 뉘앙스 정확 반영으로 전문성을 보장합니다.</p>
               </div>
               <div class="absolute left-5 top-12 bottom-0 border-l border-dashed border-[#D6C6B4]"></div>
             </div>
@@ -651,8 +805,9 @@
                 <span class="font-bold text-[#4A403A]">06</span>
               </div>
               <div>
-                <h3 class="text-xl font-medium mb-2">최종 검수</h3>
-                <p class="text-sm opacity-75 leading-relaxed">전문 특허번역 검수자가 원문과의 일치도를 교차 검증하여 오류를 최소화합니다.</p>
+                <!-- 6단계: 실시간 검증 AI -->
+                <h3 class="text-xl font-medium mb-2">실시간 검증 AI</h3>
+                <p class="text-sm opacity-75 leading-relaxed">번역 즉시 역번역 검증, 의미 손실 여부 확인, 용어 일관성 체크로 오류 원천 차단 및 실시간 품질 보증.</p>
               </div>
               <div class="absolute left-5 top-12 bottom-0 border-l border-dashed border-[#D6C6B4]"></div>
             </div>
@@ -662,8 +817,9 @@
                 <span class="font-bold text-[#4A403A]">07</span>
               </div>
               <div>
-                <h3 class="text-xl font-medium mb-2">품질 보증</h3>
-                <p class="text-sm opacity-75 leading-relaxed">독립적인 QA 팀이 번역의 전체적인 품질을 최종 승인합니다.</p>
+                <!-- 7단계: AI 최종 검수 -->
+                <h3 class="text-xl font-medium mb-2">AI 최종 검수</h3>
+                <p class="text-sm opacity-75 leading-relaxed">전체 문서 일관성 검토, 청구항 인용관계 재검증, 기재불비·거절이유 등 위험 요소를 점검하여 최종 승인합니다.</p>
               </div>
             </div>
           </div>
@@ -671,54 +827,7 @@
       </div>
     </div>
 
-    <!-- 대표 소개 섹션 -->
-    <div class="py-20 border-b border-dotted border-[#D6C6B4] bg-gradient-to-br from-[#faf9f6] to-[#f5f2ed]">
-      <div class="w-full max-w-7xl mx-auto px-4">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl font-medium mb-4">신뢰할 수 있는 <span class="text-[#E86A33]">전문성</span></h2>
-          <p class="text-lg text-gray-600">18년 경력의 변리사가 직접 검증하고 개발한 특허 번역 자동화 시스템</p>
-        </div>
-        
-        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-          <!-- 대표 프로필 이미지 -->
-          <div class="flex-shrink-0">
-            <div class="relative">
-              <div class="w-[480px] h-[480px] rounded-2xl overflow-hidden shadow-lg">
-                <%= image_tag "ceo_profile.jpg", alt: "유성원 대표변리사", class: "w-full h-full object-cover filter grayscale" %>
-              </div>
-            </div>
-          </div>
-          
-          <!-- 대표 소개 텍스트 -->
-          <div class="flex-1 text-center lg:text-left">
-            <h3 class="text-2xl font-bold mb-2">유성원 대표변리사</h3>
-            <p class="text-lg text-[#E86A33] mb-6">인텔런트 특허법률사무소 대표</p>
-            
-            <div class="mb-8">
-              <p class="text-gray-700 leading-relaxed mb-4">
-                국내 최고의 중국 특허 전문가로서 18년간 쌓아온 압도적인 실무 경험으로 한국 기업들의 지식재산권을 보호해왔습니다.
-              </p>
-              <p class="text-gray-700 leading-relaxed">
-                유성원 대표변리사의 18년 특허 번역 노하우가 <strong>금융 AI 전문기업 Moat AI</strong>의 치밀한 데이터 분석력과 만나, 그 모든 경험과 지식을 자동화된 시스템에 그대로 담아냈습니다. <strong>Verita AI</strong>는 단순한 번역 도구가 아닙니다. 이는 변리사의 깊이 있는 전문성과 AI의 정밀함이 결합하여 탄생한, 법적 유효성까지 완벽하게 보장하는 독보적인 특허 번역 전문 시스템입니다.
-              </p>
-            </div>
-            
-            
-            
-            <!-- 학력 및 자격 -->
-            <div class="bg-white rounded-lg p-6 shadow-sm">
-              <h4 class="font-semibold mb-3 text-gray-800">주요 경력 및 자격</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• 서울대학교 지구환경시스템공학부 졸업</li>
-                <li>• 제41회 변리사 시험 합격</li>
-                <li>• 기업기술가치평가사 자격</li>
-                <li>• 중국 북경 MingSure 지식재산대리 유한공사 근무</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
 
 
 
@@ -733,7 +842,7 @@
             <div class="flex items-start mb-4">
               <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mr-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4A403A" stroke-width="1.5">
-                  <path d="M12 2a10 10 0 1 0 10 10" stroke-dasharray="4 4" stroke-opacity="0.5"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 2a10 10 0 1 0 10 10" stroke-dasharray="4 4" stroke-opacity="0.5"></path>
                   <path d="M12 2v2m0 16v2m-8-10H2m18 0h-2m-6-6L4.929 4.929m14.142 14.142L14.828 14.828M4.929 19.071L9.172 14.828M19.071 4.929L14.828 9.172"></path>
                   <circle cx="12" cy="12" r="4" stroke-width="2"></circle>
                   <circle cx="12" cy="2" r="1.5" fill="#4A403A"></circle>
@@ -742,27 +851,26 @@
                   <circle cx="2" cy="12" r="1.5" fill="#4A403A"></circle>
                 </svg>
               </div>
-              <h3 class="text-xl font-bold text-gray-800">지능형 다중 에이전트 시스템</h3>
+              <h3 class="text-2xl font-bold text-gray-800">지능형 다중 에이전트 시스템</h3>
             </div>
-            <p class="text-sm leading-relaxed text-gray-600 ml-16">고도로 전문화된 인공지능 에이전트들이 협력하여 고급 기술 용어와 복합 구문을 분석하며, 일반 AI 로는 불가능한 수준의 정밀한 특허 번역을 제공합니다.</p>
-            
+                       
             <!-- 비교 그래프 섹션 -->
             <div class="comparison-chart mt-8 ml-16">
-              <h4 class="text-lg font-semibold mb-6 text-gray-700">성능 비교 분석</h4>
+              <h4 class="text-xl font-semibold mb-6 text-gray-700">성능 비교 분석</h4>
               
               <div class="grid grid-cols-2 gap-8">
                 <!-- 일반 AI -->
                 <div class="text-center bg-white p-6 rounded-lg border border-gray-200">
-                  <h5 class="text-sm font-medium mb-4 text-gray-600">일반 AI 시스템</h5>
+                  <h5 class="text-base font-medium mb-4 text-gray-600">일반 AI 시스템</h5>
                   <div class="relative mb-6">
                     <div class="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center shadow-sm">
                       <span class="text-sm font-semibold text-gray-500">AI</span>
                     </div>
-                    <p class="text-xs text-gray-500">단일 모델 처리</p>
+                    <p class="text-sm text-gray-500">단일 모델 처리</p>
                   </div>
                   <div class="space-y-4">
                     <div>
-                      <div class="flex justify-between text-xs mb-1">
+                      <div class="flex justify-between text-sm mb-1">
                         <span class="text-gray-600">번역 정확도</span>
                         <span class="font-semibold text-gray-700">65%</span>
                       </div>
@@ -771,7 +879,7 @@
                       </div>
                     </div>
                     <div>
-                      <div class="flex justify-between text-xs mb-1">
+                      <div class="flex justify-between text-sm mb-1">
                         <span class="text-gray-600">처리 속도</span>
                         <span class="font-semibold text-gray-700">90%</span>
                       </div>
@@ -780,7 +888,7 @@
                       </div>
                     </div>
                     <div>
-                      <div class="flex justify-between text-xs mb-1">
+                      <div class="flex justify-between text-sm mb-1">
                         <span class="text-gray-600">전문 용어 처리</span>
                         <span class="font-semibold text-gray-700">55%</span>
                       </div>
@@ -793,7 +901,7 @@
                 
                 <!-- 베리타 AI 다중 에이전트 -->
                 <div class="text-center bg-white p-6 rounded-lg border-2 border-gray-300">
-                  <h5 class="text-sm font-medium mb-4 text-gray-800">베리타 AI 다중 에이전트</h5>
+                  <h5 class="text-base font-medium mb-4 text-gray-800">베리타 AI 다중 에이전트</h5>
                   <div class="relative mb-6">
                     <div class="grid grid-cols-2 gap-2 w-20 h-20 mx-auto mb-4">
                       <div class="bg-[#E86A33] rounded-full flex items-center justify-center text-xs text-white font-semibold shadow-md">A1</div>
@@ -801,31 +909,31 @@
                       <div class="bg-[#E86A33] bg-opacity-80 rounded-full flex items-center justify-center text-xs text-white font-semibold shadow-md">A3</div>
                       <div class="bg-[#E86A33] rounded-full flex items-center justify-center text-xs text-white font-semibold shadow-md">A4</div>
                     </div>
-                    <p class="text-xs text-gray-600 font-medium">전문화된 다중 처리</p>
+                    <p class="text-sm text-gray-600 font-medium">전문화된 다중 처리</p>
                   </div>
                   <div class="space-y-4">
                     <div>
-                      <div class="flex justify-between text-xs mb-1">
+                      <div class="flex justify-between text-sm mb-1">
                         <span class="text-gray-600">번역 정확도</span>
-                        <span class="font-semibold text-[#E86A33]">95%</span>
+                        <span class="font-semibold text-[#E86A33]" style="text-shadow:none">95%</span>
                       </div>
                       <div class="w-full bg-gray-200 rounded-full h-2">
                         <div class="bg-[#E86A33] h-2 rounded-full" style="width: 95%"></div>
                       </div>
                     </div>
                     <div>
-                      <div class="flex justify-between text-xs mb-1">
+                      <div class="flex justify-between text-sm mb-1">
                         <span class="text-gray-600">처리 속도</span>
-                        <span class="font-semibold text-[#E86A33]">50%</span>
+                        <span class="font-semibold text-[#E86A33]" style="text-shadow:none">50%</span>
                       </div>
                       <div class="w-full bg-gray-200 rounded-full h-2">
                         <div class="bg-[#E86A33] h-2 rounded-full" style="width: 50%"></div>
                       </div>
                     </div>
                     <div>
-                      <div class="flex justify-between text-xs mb-1">
+                      <div class="flex justify-between text-sm mb-1">
                         <span class="text-gray-600">전문 용어 처리</span>
-                        <span class="font-semibold text-[#E86A33]">98%</span>
+                        <span class="font-semibold text-[#E86A33]" style="text-shadow:none">98%</span>
                       </div>
                       <div class="w-full bg-gray-200 rounded-full h-2">
                         <div class="bg-[#E86A33] h-2 rounded-full" style="width: 98%"></div>
@@ -837,29 +945,29 @@
               
               <!-- 핵심 차이점 요약 -->
               <div class="mt-6 p-4 bg-gray-50 rounded-lg border-l-4 border-[#E86A33]">
-                <p class="text-sm text-gray-700 font-medium">
+                <p class="text-base text-gray-700 font-medium">
                   <span class="text-gray-800 font-bold">핵심 차이점:</span> 
-                  베리타 AI의 처리 시간이 더 소요되는 이유는 단순 속도 경쟁이 아닌, 비교할 수 없는 정확성을 추구하기 때문입니다. 고도로 전문화된 다중 에이전트 분석과 <span class="text-[#E86A33] font-bold">전문 변리사의 최종 검수</span> 과정은 월등히 높은 번역 품질을 보장합니다.
+                  베리타 AI의 처리 시간이 더 소요되는 이유는 단순 속도 경쟁이 아닌, 비교할 수 없는 정확성을 추구하기 때문입니다. 고도로 전문화된 다중 에이전트 분석과 <span class="text-[#E86A33] font-bold">최종 검수 에이전트</span>의 검증 과정은 월등히 높은 번역 품질을 보장합니다.
                 </p>
               </div>
             </div>
             
             <!-- 상세 설명 확장 섹션 -->
             <div class="detailed-explanation mt-8 ml-16">
-              <h4 class="text-lg font-semibold mb-6 text-gray-700">다중 에이전트 시스템의 핵심 장점</h4>
+              <h4 class="text-xl font-semibold mb-6 text-gray-700">다중 에이전트 시스템의 핵심 장점</h4>
               
               <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- 전문화 -->
                 <div class="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-md transition-all duration-300">
                   <div class="flex items-center mb-4">
-                    <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                    <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-4">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-600">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0011.664 0l3.181-3.183m-3.181-3.182l-3.182 3.182m0 0l-3.182-3.182" />
                       </svg>
                     </div>
-                    <div class="text-gray-800 font-bold text-sm">전문화</div>
+                    <div class="text-gray-800 font-bold text-base">전문화</div>
                   </div>
-                  <p class="text-sm text-gray-600 leading-relaxed">
+                  <p class="text-base text-gray-600 leading-relaxed">
                     각 에이전트가 특정 분야
                     <span class="font-semibold text-gray-700">(바이오, IT, 기계, 화학 등)</span>
                     에 특화되어 해당 분야의
@@ -870,32 +978,31 @@
                 <!-- 속도와 정확성 -->
                 <div class="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-md transition-all duration-300">
                   <div class="flex items-center mb-4">
-                    <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                    <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-4">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-600">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286z" />
                       </svg>
                     </div>
-                    <div class="text-gray-800 font-bold text-sm">속도와 정확성</div>
+                    <div class="text-gray-800 font-bold text-base">속도와 정확성</div>
                   </div>
-                  <p class="text-sm text-gray-600 leading-relaxed">
-                    AI 자동 번역으로 초고속 번역을 완성하고,
-                    <span class="font-semibold text-[#E86A33]">최종 검수는 전문 번역가</span>가
-                    직접 수행하여 속도와 정확성을
-                    모두 보장합니다.
+                  <p class="text-base text-gray-600 leading-relaxed">
+                    AI 자동 번역으로 속도를 90%이상 줄이고,
+                    <span class="font-semibold text-[#E86A33]">최종 검수 전용 에이전트가</span>
+                    별도로 검증을 수행하여 정확성 또한 보장합니다.
                   </p>
                 </div>
                 
                 <!-- 상호 검증 -->
                 <div class="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-md transition-all duration-300">
                   <div class="flex items-center mb-4">
-                    <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                    <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-4">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-600">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0011.664 0l3.181-3.183m-3.181-3.182l-3.182 3.182m0 0l-3.182-3.182" />
                       </svg>
                     </div>
-                    <div class="text-gray-800 font-bold text-sm">상호 검증</div>
+                    <div class="text-gray-800 font-bold text-base">상호 검증</div>
                   </div>
-                  <p class="text-sm text-gray-600 leading-relaxed">
+                  <p class="text-base text-gray-600 leading-relaxed">
                     에이전트 간 <span class="font-semibold text-gray-700">크로스 체킹</span>
                     시스템으로 번역 결과를
                     실시간으로 상호 검증하여
@@ -955,6 +1062,106 @@
         </div>
       </div>
     </section>
+    
+    <!-- 대표 소개 섹션 (보안 섹션 아래로 이동) -->
+    <div class="py-20 border-b border-dotted border-[#D6C6B4] bg-gradient-to-br from-[#faf9f6] to-[#f5f2ed]">
+      <div class="w-full max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-medium mb-4">신뢰할 수 있는 <span class="text-[#E86A33]">전문성</span></h2>
+          <p class="text-lg text-gray-600">18년 경력의 변리사가 직접 검증하고 개발한 특허 번역 자동화 시스템</p>
+        </div>
+        
+        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+          <!-- 대표 프로필 이미지 -->
+          <div class="flex-shrink-0">
+            <div class="relative">
+              <div class="w-[480px] h-[480px] rounded-2xl overflow-hidden shadow-lg">
+                <%= image_tag "ceo_profile.jpg", alt: "유성원 대표변리사", class: "w-full h-full object-cover filter grayscale" %>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 대표 소개 텍스트 -->
+          <div class="flex-1 text-center lg:text-left">
+            <h3 class="text-2xl font-bold mb-2">유성원 대표변리사</h3>
+            <p class="text-lg text-[#E86A33] mb-6">인텔런트 특허법률사무소 대표</p>
+            
+            <div class="mb-8">
+              <p class="text-gray-700 leading-relaxed">
+                유성원 대표변리사의 18년 특허 번역 노하우가 <strong>금융 AI</strong>의 치밀한 데이터 분석력과 만나, 그 모든 경험과 지식을 자동화된 시스템에 그대로 담아냈습니다. <strong>Verita AI</strong>는 단순한 번역 도구가 아닙니다. 이는 변리사의 깊이 있는 전문성과 AI의 정밀함이 결합하여 탄생한, 법적 유효성까지 완벽하게 보장하는 독보적인 특허 번역 전문 시스템입니다.
+              </p>
+            </div>
+            
+            
+            
+            <!-- 학력 및 자격 -->
+            <div class="bg-white rounded-lg p-6 shadow-sm">
+              <h4 class="font-semibold mb-3 text-gray-800">주요 경력 및 자격</h4>
+              <!-- 두 번째 이미지의 문구로 대체: 체크 아이콘과 굵은 카테고리 라벨 포함 -->
+              <ul class="text-sm text-gray-700 space-y-3 leading-6">
+                <!-- 전문가 소개 -->
+                <li class="flex items-start">
+                  <span class="text-[#E86A33] mr-2">✔</span>
+                  <p>
+                    <span class="font-semibold">지식재산 분쟁 및 특허 번역 품질관리 전문가</span>
+                    — 중국 상표 브로커 대응, 정부 지재권 분쟁 <span class="font-semibold">53건 53승</span>. 특허 번역 전 과정(사전 전략 수립→번역→검수→납품)에서 품질 지표와 체크리스트를 정립하여 <span class="font-semibold">7-Agent AI 시스템</span>에 반영
+                  </p>
+                </li>
+                <!-- 학력 -->
+                <li class="flex items-start">
+                  <span class="text-[#E86A33] mr-2">✔</span>
+                  <p>
+                    <span class="font-semibold">학력:</span> 한성과학고등학교, 서울대학교 공과대학(95학번), 북경어연대학교 수료
+                  </p>
+                </li>
+                <!-- 자격 -->
+                <li class="flex items-start">
+                  <span class="text-[#E86A33] mr-2">✔</span>
+                  <p>
+                    <span class="font-semibold">자격:</span> 2004년 제41회 변리사 시험 합격
+                  </p>
+                </li>
+                <!-- 경력 -->
+                <li class="flex items-start">
+                  <span class="text-[#E86A33] mr-2">✔</span>
+                  <p>
+                    <span class="font-semibold">경력:</span> 유미특허법인, 제일특허법인 근무, 한국 기업의 미국/유럽 특허 출원 전문, 중국 로펌 근무 경험
+                  </p>
+                </li>
+                <!-- 활동 -->
+                <li class="flex items-start">
+                  <span class="text-[#E86A33] mr-2">✔</span>
+                  <p>
+                    <span class="font-semibold">활동:</span> tvN ‘유퀴즈 온 더 블럭’ 출연, 특허 번역 관련 다수 교육과정 강의
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        
+        <!-- 호출 영역(CTA): 보안 섹션 바로 아래로 이동 배치 -->
+        <!-- 마지막 섹션: 호출 영역 (보안 섹션 아래로 이동) -->
+        <div class="bg-[#F5EFE6] py-24 sm:py-32 mobile-section-padding pb-0">
+          <div class="w-full max-w-7xl mx-auto text-center px-6 lg:px-8 mobile-container-padding">
+            <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl mobile-heading-xl">
+              지금 바로 <span class="text-[#E86A33]">Verita AI</span>의 혁신을 경험하세요
+            </h2>
+            <p class="mt-6 text-lg leading-8 text-gray-700 max-w-3xl mx-auto mobile-description">
+              고객이라면 누구나 Verita AI의 압도적인 번역 품질을 확인하실 수 있도록,
+              <br>
+              <span class="font-bold text-gray-900">특허 번역 100페이지를 무료로 체험하세요.</span>
+            </p>
+            <div class="mt-10 flex items-center justify-center gap-x-6">
+              <!-- 클릭 시 이메일 주소를 클립보드로 복사합니다. 컨트롤러: copy-to-clipboard -->
+              <a href="/contact" class="rounded-lg bg-[#E86A33] px-8 py-4 text-lg font-semibold text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500 transition duration-300 ease-in-out transform hover:scale-105 mobile-button">
+                무료 번역 시작하기
+              </a>
+            </div>
+          </div>
+        </div>
         
 
         </div>
@@ -965,13 +1172,17 @@
     </div>
   </div>
 
-  <footer class="bg-[#4A403A] text-white">
-    <div class="container mx-auto max-w-7xl px-5 md:px-8 lg:px-12 xl:px-16 py-16">
+</div>
+
+<footer class="bg-[#4A403A] text-white w-full">
+  <div class="w-full py-8">
+    <div class="container mx-auto max-w-7xl px-5 md:px-8 lg:px-12 xl:px-16">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
         <div>
           <h3 class="text-xl font-bold tracking-[0.2em] mb-4">VERITA AI</h3>
           <p class="text-sm text-gray-400 leading-relaxed">
-            18년 경력 변리사의 전문성과 금융 AI의 기술력이 만나 탄생한 특허 번역의 새로운 기준.
+            18년 경력의 변리사의 전문성과
+            금융 AI의 분석력이 만나<br>탄생한 특허 번역의 새로운 기준.
           </p>
         </div>
         <div>
@@ -979,7 +1190,6 @@
           <ul class="space-y-3 text-sm">
             <li><a href="#" class="text-gray-400 hover:text-white transition-colors">이용약관</a></li>
             <li><a href="#" class="text-gray-400 hover:text-white transition-colors">개인정보처리방침</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">문의하기</a></li>
           </ul>
         </div>
         <div>
@@ -1008,9 +1218,9 @@
           </ul>
         </div>
       </div>
-      <div class="mt-16 border-t border-gray-700 pt-8 text-center text-xs text-gray-500">
+      <div class="mt-8 border-t border-gray-700 pt-4 text-center text-xs text-gray-500">
         <p>&copy; 2025 Verita AI Inc. All rights reserved.</p>
       </div>
     </div>
-  </footer>
-</div>
+  </div>
+</footer>

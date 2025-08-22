@@ -2,6 +2,179 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
+/* 한국어 가독성을 위한 웹폰트 로드: Pretendard Variable + Noto Sans KR */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300..900&display=swap');
 
+/* 전역 기본 폰트: 본문에는 sans 적용, 헤더는 마크업에서 serif 유지 */
+@layer base {
+  /* 주의: 헤더는 마크업에서 별도 font-serif 처리합니다. */
+  body {
+    font-family: theme('fontFamily.sans');
+  }
+}
+
+@layer components {
+  /* 데스크탑 구조 완전 보존을 위한 모바일 전용 반응형 스타일 */
+  
+  /* 모바일에서만 적용되는 스타일 (768px 미만) */
+  @media (max-width: 767px) {
+    /* 헤더 모바일 최적화 - 데스크탑 구조 유지하면서 모바일 조정 */
+    .mobile-header-grid {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+    
+    .mobile-header-brand {
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      padding: 0.75rem;
+    }
+    
+    .mobile-header-nav {
+      padding: 0.75rem;
+      justify-content: center;
+      font-size: 0.625rem;
+    }
+    
+    .mobile-header-nav > * + * {
+      margin-left: 1.5rem;
+    }
+    
+    /* 메인 콘텐츠 모바일 최적화 */
+    .mobile-main-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 1rem;
+    }
+    
+    .mobile-content-left {
+      border-right: none;
+      border-bottom: 1px dotted #D6C6B4;
+      padding: 1rem;
+      min-height: 300px;
+    }
+    
+    .mobile-content-right {
+      padding: 1rem;
+      text-align: center;
+    }
+    
+    /* 타이틀 모바일 최적화 */
+    .mobile-title {
+      font-size: 2.5rem;
+      line-height: 1.1;
+      text-align: center;
+    }
+    
+    .mobile-description {
+      font-size: 0.875rem;
+      max-width: 100%;
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+    
+    /* 애니메이션 요소 모바일 크기 조정 */
+    .mobile-animation {
+      width: 120px;
+      height: 120px;
+    }
+    
+    /* 푸터 모바일 최적화 */
+    .mobile-footer-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 0.5rem;
+    }
+    
+    /* 섹션 패딩 모바일 조정 */
+    .mobile-section-padding {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+    
+    /* 컨테이너 모바일 패딩 */
+    .mobile-container-padding {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    
+    /* 카드 그리드 모바일 최적화 */
+    .mobile-card-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    /* 이미지 비교 컨테이너 모바일 최적화 */
+    .mobile-image-compare {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    
+    /* 태그 그리드 모바일 최적화 */
+    .mobile-tag-grid {
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .mobile-tag {
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+    }
+    
+    /* 버튼 모바일 최적화 */
+    .mobile-button {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+    }
+    
+    /* 제목 모바일 크기 조정 */
+    .mobile-heading-xl {
+      font-size: 2rem;
+    }
+    
+    .mobile-heading-lg {
+      font-size: 1.5rem;
+    }
+    
+    .mobile-heading-md {
+      font-size: 1.25rem;
+    }
+  }
+  
+  /* 작은 모바일 디바이스 (480px 미만) */
+  @media (max-width: 479px) {
+    .mobile-title {
+      font-size: 2rem;
+    }
+    
+    .mobile-description {
+      font-size: 0.8rem;
+    }
+    
+    .mobile-animation {
+      width: 100px;
+      height: 100px;
+    }
+    
+    .mobile-header-brand {
+      font-size: 0.875rem;
+    }
+    
+    .mobile-header-nav {
+      font-size: 0.5rem;
+    }
+    
+    .mobile-header-nav > * + * {
+      margin-left: 1rem;
+    }
+    
+    .mobile-heading-xl {
+      font-size: 1.75rem;
+    }
+    
+    .mobile-heading-lg {
+      font-size: 1.25rem;
+    }
+  }
 }
