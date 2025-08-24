@@ -154,8 +154,8 @@ export default class extends Controller {
   
   highlightComparison() {
     // 핵심 차이점 섹션 강조
-    const comparisonBox = this.element.querySelector('.border-l-4.border-[#E86A33]')
-    
+    const comparisonBox = this.element.querySelector('[class*="border-[#E86A33]"]');
+
     if (comparisonBox) {
       // 부드러운 강조 효과
       comparisonBox.style.transition = 'all 0.8s ease'
@@ -170,7 +170,7 @@ export default class extends Controller {
     }
     
     // 기술적 우위 섹션 강조
-    const techAdvantageBox = this.element.querySelector('.bg-gradient-to-r.from-[#E86A33]')
+    const techAdvantageBox = this.element.querySelector('[class*="from-[#E86A33]"]');
     
     if (techAdvantageBox) {
       techAdvantageBox.style.transition = 'all 0.8s ease'
