@@ -88,52 +88,5 @@
   </section>
 
   <!-- 푸터: index의 하단 푸터 복제 -->
-  <footer class="bg-[#4A403A] text-white w-full mt-16">
-    <div class="w-full py-8">
-      <div class="container mx-auto max-w-7xl px-5 md:px-8 lg:px-12 xl:px-16">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
-          <div>
-            <h3 class="text-xl font-bold tracking-[0.2em] mb-4">VERITA AI</h3>
-            <p class="text-sm text-gray-400 leading-relaxed">
-              18년 경력의 변리사의 전문성과 금융 AI의 기술력이 만나 탄생한 특허 번역의 새로운 기준.
-            </p>
-          </div>
-          <div>
-            <h4 class="font-semibold mb-4 text-gray-200 tracking-wider">사이트 안내</h4>
-            <ul class="space-y-3 text-sm">
-              <li><a href="#" class="text-gray-400 hover:text-white transition-colors">이용약관</a></li>
-              <li><a href="#" class="text-gray-400 hover:text-white transition-colors">개인정보처리방침</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="font-semibold mb-4 text-gray-200 tracking-wider">회사 정보</h4>
-            <ul class="space-y-3 text-sm text-gray-400">
-              <li><strong>법인명:</strong> (주)베리타에이아이</li>
-              <li><strong>대표:</strong> 유성원</li>
-              <li><strong>주소:</strong> 서울특별시 강남구 테헤란로 123, 45층</li>
-              <li>
-                <strong>이메일:</strong>
-                <a
-                  href="#"
-                  class="text-gray-300 hover:text-white underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-400 rounded-sm"
-                  title="이메일 주소 복사"
-                  aria-label="이메일 주소 복사"
-                  data-controller="copy-to-clipboard"
-                  data-action="click->copy-to-clipboard#copy"
-                  data-copy-to-clipboard-email-value="veritaai.korea@gmail.com"
-                  data-copy-to-clipboard-success-text-value="복사 완료!"
-                  data-copy-to-clipboard-revert-ms-value="1500"
-                >
-                  <span data-copy-to-clipboard-target="label">veritaai.korea@gmail.com</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="mt-8 border-t border-gray-700 pt-4 text-center text-xs text-gray-500">
-          <p>&copy; 2025 Verita AI Inc. All rights reserved.</p>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <%= render 'layouts/footer' %>
 </div>
