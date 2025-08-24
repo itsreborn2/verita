@@ -87,11 +87,13 @@ jobs:
       - name: Grant execute permission for bin scripts
         run: chmod +x bin/*
 
-      - name: Run tests
+      - name: Run database migrations
         env:
           RAILS_ENV: test
-          # REDIS_URL: redis://localhost:6379/0
-        run: bundle exec bin/rails db:test:prepare test test:system
+        run: bundle exec bin/rails db:migrate
+
+      - name: Run tests
+        run: bundle exec bin/rails test test:system
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
