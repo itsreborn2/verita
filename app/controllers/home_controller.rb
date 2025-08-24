@@ -12,7 +12,7 @@ class HomeController < ApplicationController
       processing_time_reduction: "90%", # 처리 시간 단축
       security_level: "군사급"           # 보안 수준
     }
-    
+
     # 고객 후기 데이터 (가상의 후기)
     @testimonials = [
       {
@@ -22,7 +22,7 @@ class HomeController < ApplicationController
         rating: 5
       },
       {
-        name: "박○○ 연구원", 
+        name: "박○○ 연구원",
         company: "○○전자 R&D센터",
         comment: "번역 품질이 전문 번역사 수준입니다. 기술 용어 번역이 특히 정확해요.",
         rating: 5
@@ -34,7 +34,7 @@ class HomeController < ApplicationController
         rating: 5
       }
     ]
-    
+
     # FAQ 데이터
     @faqs = [
       {
@@ -58,7 +58,7 @@ class HomeController < ApplicationController
         answer: "일반적으로 A4 1페이지당 2-3분 내에 번역이 완료됩니다. Premium 회원은 우선 처리로 더욱 빠른 번역이 가능합니다."
       }
     ]
-    
+
     # 가격 정책 데이터
     @pricing_plans = [
       {
@@ -112,7 +112,7 @@ class HomeController < ApplicationController
       }
     ]
   end
-  
+
   # 가격 정책 페이지
   # GET /pricing
   # 헤더/푸터는 뷰에서 동일 마크업을 포함하여 유지합니다.
@@ -166,21 +166,21 @@ class HomeController < ApplicationController
       }
     ]
   end
-  
+
   # 데모 번역 기능 (간단한 예시)
   # POST /demo_translate
   def demo_translate
     input_text = params[:text]&.strip
-    
+
     if input_text.blank?
       render json: { error: "번역할 텍스트를 입력해주세요." }, status: 400
       return
     end
-    
+
     # 실제로는 번역 API를 호출하지만, 데모용으로 간단한 예시 응답
     demo_translations = {
       "특허 출원" => "Patent Application",
-      "발명의 명칭" => "Title of Invention", 
+      "발명의 명칭" => "Title of Invention",
       "기술분야" => "Technical Field",
       "배경기술" => "Background Art",
       "발명의 내용" => "Description of Invention",
@@ -199,13 +199,13 @@ class HomeController < ApplicationController
       translated_text = "Translation result will appear here... (Demo version)"
     end
     
-    render json: { 
+    render json: {
       original: input_text,
       translated: translated_text,
       message: "💡 실제 번역은 회원가입 후 이용 가능합니다."
     }
   end
-  
+
   # 번역 요청 폼 페이지
   # GET /contact
   def contact
@@ -217,7 +217,7 @@ class HomeController < ApplicationController
       { value: 'inquiry', label: '문의', description: '번역 관련 상담 및 문의' }
     ]
   end
-  
+
   # 번역 요청 메일 발송
   # POST /send_translation_request
   def send_translation_request
@@ -226,23 +226,23 @@ class HomeController < ApplicationController
     # 따라서 필수 목록에서 :phone을 제외하여, 미입력 시에도 접수되도록 합니다.
     required_params = [:translation_type, :name, :company, :email, :content]
     missing_params = required_params.select { |param| params[param].blank? }
-    
+
     if missing_params.any?
       flash[:error] = "필수 정보를 모두 입력해주세요: #{missing_params.join(', ')}"
       redirect_to contact_path and return
     end
-    
+
     # 이메일 형식 검증
     unless params[:email].match?(/\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i)
       flash[:error] = "올바른 이메일 주소를 입력해주세요."
       redirect_to contact_path and return
     end
-    
+
     # 파일 첨부 처리 (선택사항)
     # 2025-08-21: 폼의 파일 필드 네임은 `:file` 이므로 `params[:file]`에서 읽도록 수정했습니다.
     # 기존에는 `params[:attachment]`로 읽어 첨부가 누락되는 문제가 있었습니다.
     attachment_file = params[:file]
-    
+
     begin
       # 번역 요청 메일 발송
       begin
@@ -270,7 +270,7 @@ class HomeController < ApplicationController
         Rails.logger.error "Translation request email failed: #{e.message}"
         flash[:error] = "메일 발송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요."
       end
-      
+
       redirect_to contact_path
     end
   end
