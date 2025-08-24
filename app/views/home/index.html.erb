@@ -192,16 +192,26 @@
       </div>
 
       <!-- 3. Content Area (Middle row, Right column) -->
-      <div class="p-4 flex flex-col justify-end items-end mobile-content-right">
+      <div class="p-4 flex flex-col justify-end items-end mobile-content-right mb-12">
         <div class="text-right">
           <!-- 헤더와 동일한 폰트(serif) 적용: 히어로 타이틀 전용 -->
           <div class="flex flex-col items-end w-full font-serif">
             <h1 class="text-8xl font-medium leading-none self-start mobile-title">Meet</h1>
             <h1 class="text-8xl font-medium leading-none mt-2 mobile-title">Verita AI</h1>
           </div>
-          <p class="text-lg max-w-md mt-8 leading-relaxed mobile-description">
-            Verita AI는 <span class="text-[#E86A33] font-semibold">기존 특허 번역 대비 95% 이상 빠른 속도</span>와 <span class="text-[#E86A33] font-semibold">50% 이상 저렴한 가격</span>, 그리고 일반 AI 번역을 압도하는 <span class="text-[#E86A33] font-semibold">법률적 정확성</span>을 제공합니다. 대폭 단축된 업무 시간과 귀사의 소중한 지적 재산권을 완벽하게 보호하는 특허 번역의 <span class="text-[#E86A33]">새로운 기준</span>을 경험하세요.
-          </p>
+          <%# 데스크톱용 설명 %>
+          <div class="text-lg max-w-md mt-8 leading-relaxed mobile-description hidden md:block space-y-2">
+            <p>기존 특허 대비 <span class="text-[#E86A33] font-semibold">95%</span> 빠른 속도</p>
+            <p><span class="text-[#E86A33] font-semibold">50%</span> 이상 저렴한 가격</p>
+            <p>일반AI를 압도하는 <span class="text-[#E86A33] font-semibold">법률 정확성</span></p>
+          </div>
+
+          <%# 모바일용 요약 설명 %>
+          <div class="text-lg max-w-md mt-8 leading-relaxed mobile-description block md:hidden space-y-2">
+            <p>기존 특허 대비 <span class="text-[#E86A33] font-semibold">95%</span> 빠른 속도</p>
+            <p><span class="text-[#E86A33] font-semibold">50%</span> 이상 저렴한 가격</p>
+            <p>일반AI를 압도하는 <span class="text-[#E86A33] font-semibold">법률 정확성</span></p>
+          </div>
         </div>
       </div>
 
@@ -877,13 +887,7 @@
             <div class="flex items-start mb-4">
               <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mr-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4A403A" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 2a10 10 0 1 0 10 10" stroke-dasharray="4 4" stroke-opacity="0.5"></path>
-                  <path d="M12 2v2m0 16v2m-8-10H2m18 0h-2m-6-6L4.929 4.929m14.142 14.142L14.828 14.828M4.929 19.071L9.172 14.828M19.071 4.929L14.828 9.172"></path>
-                  <circle cx="12" cy="12" r="4" stroke-width="2"></circle>
-                  <circle cx="12" cy="2" r="1.5" fill="#4A403A"></circle>
-                  <circle cx="22" cy="12" r="1.5" fill="#4A403A"></circle>
-                  <circle cx="12" cy="22" r="1.5" fill="#4A403A"></circle>
-                  <circle cx="2" cy="12" r="1.5" fill="#4A403A"></circle>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.562L16.25 22.5l-.648-1.938a3.375 3.375 0 00-2.685-2.685L11.25 18l1.938-.648a3.375 3.375 0 002.685-2.685L16.25 13.5l.648 1.938a3.375 3.375 0 002.685 2.685L21.5 18l-1.938.648a3.375 3.375 0 00-2.685 2.685z" />
                 </svg>
               </div>
               <h3 class="text-2xl font-bold text-gray-800">지능형 다중 에이전트 시스템</h3>
@@ -1139,7 +1143,8 @@
                   <span class="hidden md:inline text-[#E86A33] mr-2">✔</span>
                   <p>
                     <span class="font-semibold">지식재산 분쟁 및 특허 번역 품질관리 전문가</span>
-                    — 중국 상표 브로커 대응, 정부 지재권 분쟁 <span class="font-semibold">53건 53승</span>. 특허 번역 전 과정(사전 전략 수립→번역→검수→납품)에서 품질 지표와 체크리스트를 정립하여 <span class="font-semibold">7-Agent AI 시스템</span>에 반영
+                    — 중국 상표 브로커 대응, 정부 지재권 분쟁 <span class="font-semibold">53건 53승</span>. 
+                    <span class="hidden md:inline">특허 번역 전 과정(사전 전략 수립→번역→검수→납품)에서 품질 지표와 체크리스트를 정립하여 <span class="font-semibold">7-Agent AI 시스템</span>에 반영</span>
                   </p>
                 </li>
                 <!-- 학력 -->
