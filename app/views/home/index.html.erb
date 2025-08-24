@@ -44,7 +44,10 @@
           <a href="#" class="hover:text-[#E86A33]">STAY CONNECTED</a>
           -->
           <!-- Pricing 메뉴 추가 -->
-                              <a href="/pricing" class="hidden md:inline-block hover:text-[#E86A33]">Pricing</a>
+                              <%# 현재 페이지가 pricing_path가 아닐 경우에만 링크 표시 %>
+                              <% unless current_page?(pricing_path) %>
+                                <a href="/pricing" class="hidden md:inline-block hover:text-[#E86A33]">Pricing</a>
+                              <% end %>
           <!-- 헤더 우측 CTA: 하단 버튼 스타일을 계승, 사이즈 축소 -->
           <!-- 버튼 좌우 여백 미세 조정: px-6 -> px-5 (세로는 원래 유지) -->
           <a href="/contact"
