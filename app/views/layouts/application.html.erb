@@ -24,7 +24,10 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="h-full">
-    <%= yield %>
+  <body class="h-full flex flex-col">
+    <main class="flex-grow">
+      <%= yield %>
+    </main>
+    <%= render 'layouts/footer' %>
   </body>
 </html>
