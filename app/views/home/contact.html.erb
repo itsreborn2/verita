@@ -40,7 +40,7 @@
 
     <!-- 번역 요청 폼 -->
     <div class="bg-[#F5EFE6] p-0 mt-10 md:mt-12">
-      <%= form_with url: send_translation_request_path, method: :post, multipart: true, local: true, class: "space-y-4" do |form| %>
+      <%= form_with url: send_translation_request_path, method: :post, multipart: true, local: true, class: "space-y-4", id: "translation_form" do |form| %>
 
         <!-- 이름 -->
         <div>
@@ -102,27 +102,28 @@
 
         <!-- 파일 첨부 -->
         <div>
-          <%= form.label :file, "파일 첨부 (선택)", class: "block text-sm font-medium text-[#4A403A] mb-2" %>
+          <%= form.label :files, "파일 첨부 (선택, 다중 선택 가능)", class: "block text-sm font-medium text-[#4A403A] mb-2" %>
           <div class="relative">
-            <%= form.file_field :file, 
+            <%= form.file_field :files, 
+                multiple: true,
                 class: "hidden",
-                accept: ".pdf,.doc,.docx,.txt",
+                accept: ".pdf,.doc,.docx,.txt,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword,application/pdf,text/plain",
                 id: "file_input",
-                onchange: "
-                  var displayElement = document.getElementById('file_display');
-                  if (this.files && this.files[0]) {
-                    displayElement.textContent = this.files[0].name;
-                    displayElement.className = 'text-[#4A403A]';
-                  } else {
-                    displayElement.textContent = '이곳을 눌러 파일을 선택하세요';
-                    displayElement.className = 'text-gray-500';
-                  }
-                " %>
+                onchange: "updateFileDisplay()" %>
+            <!-- 파일 선택 버튼 (탐색기 팝업 기능 유지) -->
             <div class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-1 focus:ring-[#E86A33] focus:border-[#E86A33] cursor-pointer flex items-center justify-between"
                  onclick="document.getElementById('file_input').click()">
               <span id="file_display" class="text-gray-500">이곳을 눌러 파일을 선택하세요</span>
             </div>
           </div>
+          
+          <!-- 선택된 파일 목록 표시 영역 (심플 버전) -->
+          <div id="selected_files_container" class="mt-2 hidden">
+            <div id="selected_files_list" class="text-sm text-gray-600 space-y-1">
+              <!-- 파일 목록이 여기에 동적으로 추가됩니다 -->
+            </div>
+          </div>
+          
           <p class="text-xs text-gray-500 mt-1">파일은 보안상 전송즉시 삭제됩니다.</p>
         </div>
 
@@ -139,6 +140,7 @@
         <!-- 발송 버튼 -->
         <div class="pt-4 pb-12 md:pb-16 flex justify-center">
           <%= form.submit "문의하기", 
+              id: "submit_button",
               class: "w-[30%] bg-[#E86A33] text-white py-3 px-6 rounded-lg font-semibold hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-[#E86A33] focus:ring-offset-2 transition-colors cursor-pointer shadow-sm" %>
         </div>
 
@@ -147,5 +149,137 @@
 
   </div>
 </div>
+
+<script>
+// 파일 선택 상태를 관리하는 전역 변수
+let selectedFiles = [];
+
+/**
+ * 파일 선택 시 호출되는 함수
+ * 탐색기 팝업 기능을 유지하면서 선택된 파일 목록을 표시
+ */
+function updateFileDisplay() {
+  const fileInput = document.getElementById('file_input');
+  const displayElement = document.getElementById('file_display');
+  const filesContainer = document.getElementById('selected_files_container');
+  const filesList = document.getElementById('selected_files_list');
+  const fileCount = document.getElementById('file_count');
+  
+  // 선택된 파일들을 배열로 변환
+  selectedFiles = Array.from(fileInput.files);
+  
+  if (selectedFiles.length > 0) {
+    // 파일 선택 버튼 텍스트 업데이트
+    if (selectedFiles.length === 1) {
+      displayElement.textContent = selectedFiles[0].name;
+    } else {
+      displayElement.textContent = `${selectedFiles.length}개의 파일이 선택되었습니다.`;
+    }
+    displayElement.className = 'text-[#4A403A]';
+    
+    // 파일 목록 컨테이너 표시
+    filesContainer.classList.remove('hidden');
+    
+    // 파일 목록 생성
+    renderFileList();
+  } else {
+    // 파일이 선택되지 않은 경우
+    displayElement.textContent = '이곳을 눌러 파일을 선택하세요';
+    displayElement.className = 'text-gray-500';
+    filesContainer.classList.add('hidden');
+  }
+}
+
+/**
+ * 선택된 파일 목록을 렌더링하는 함수 (심플 버전)
+ */
+function renderFileList() {
+  const filesList = document.getElementById('selected_files_list');
+  
+  // 기존 목록 초기화
+  filesList.innerHTML = '';
+  
+  selectedFiles.forEach((file, index) => {
+    const fileItem = document.createElement('div');
+    fileItem.className = 'flex items-center justify-between';
+    
+    // 파일명과 크기를 한 줄에 표시
+    const fileText = document.createElement('span');
+    fileText.className = 'flex-1 text-sm';
+    fileText.textContent = `${file.name} (${formatFileSize(file.size)})`;
+    
+    // 삭제 버튼
+    const deleteButton = document.createElement('button');
+    deleteButton.type = 'button';
+    deleteButton.className = 'ml-2 text-red-500 hover:text-red-700 text-sm cursor-pointer';
+    deleteButton.textContent = '삭제';
+    deleteButton.onclick = () => removeFile(index);
+    
+    fileItem.appendChild(fileText);
+    fileItem.appendChild(deleteButton);
+    filesList.appendChild(fileItem);
+  });
+}
+
+/**
+ * 특정 인덱스의 파일을 제거하는 함수
+ */
+function removeFile(index) {
+  // 배열에서 해당 파일 제거
+  selectedFiles.splice(index, 1);
+  
+  // 새로운 FileList 객체 생성 (브라우저 호환성을 위해)
+  const dataTransfer = new DataTransfer();
+  selectedFiles.forEach(file => {
+    dataTransfer.items.add(file);
+  });
+  
+  // 파일 input의 files 속성 업데이트
+  const fileInput = document.getElementById('file_input');
+  fileInput.files = dataTransfer.files;
+  
+  // 화면 업데이트
+  updateFileDisplay();
+}
+
+/**
+ * 파일 크기를 사람이 읽기 쉬운 형태로 변환하는 함수
+ */
+function formatFileSize(bytes) {
+  if (bytes === 0) return '0 Bytes';
+  
+  const k = 1024;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+}
+
+/**
+ * 폼 제출 시 로딩 상태를 표시하는 함수
+ */
+function showLoadingState() {
+  const submitButton = document.getElementById('submit_button');
+  
+  // 버튼 텍스트를 로딩 상태로 변경
+  submitButton.value = '발송중...';
+  submitButton.disabled = true;
+  submitButton.style.opacity = '0.7';
+  submitButton.style.cursor = 'not-allowed';
+}
+
+// 페이지 로드 완료 후 이벤트 리스너 추가
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('translation_form');
+  const submitButton = document.getElementById('submit_button');
+  
+  if (form && submitButton) {
+    form.addEventListener('submit', function(event) {
+      // 폼 제출 전에 버튼 상태 변경
+      showLoadingState();
+    });
+  }
+});
+</script>
 
 

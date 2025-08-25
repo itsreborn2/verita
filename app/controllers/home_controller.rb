@@ -239,22 +239,35 @@ class HomeController < ApplicationController
     end
 
     # 파일 첨부 처리 (선택사항)
-    # 2025-08-21: 폼의 파일 필드 네임은 `:file` 이므로 `params[:file]`에서 읽도록 수정했습니다.
-    # 기존에는 `params[:attachment]`로 읽어 첨부가 누락되는 문제가 있었습니다.
-    attachment_file = params[:file]
+    # 폼의 파일 필드 네임은 `:files` (다중 파일 지원)
+    attachment_files = params[:files]
+    
+    # 실제 파일이 첨부된 경우만 필터링 (빈 문자열 제외)
+    valid_files = attachment_files&.reject { |file| file.blank? || file.is_a?(String) }
+    has_attachments = valid_files&.any?
 
     begin
       # 번역 요청 메일 발송
+      # 파일 첨부가 있으면 동기 처리 (ActiveJob 직렬화 문제 회피)
+      # 파일이 없으면 비동기 처리로 빠른 응답
       begin
-        TranslationMailer.send_translation_request(
+        mailer = TranslationMailer.send_translation_request(
           translation_type: params[:translation_type],
           name: params[:name],
           company: params[:company],
           phone: params[:phone],
           email: params[:email],
           content: params[:content],
-          attachment: attachment_file
-        ).deliver_now
+          attachment: valid_files
+        )
+        
+        if has_attachments
+          # 파일 첨부가 있는 경우 동기 발송
+          mailer.deliver_now
+        else
+          # 파일이 없는 경우 비동기 발송
+          mailer.deliver_later
+        end
 
         # 2025-08-21: 사용자 요청에 따른 성공 메시지 문구 변경 (한 줄 바꿈 포함)
         flash[:success] = "요청이 발송 되었습니다.\n일반, 거래이유 통지서 번역은 3시간 이내 납품 처리되며, 긴급 번역은 번역이 시작되는 즉시 확인 안내 유선 연락을 드리겠습니다."
