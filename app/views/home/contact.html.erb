@@ -97,7 +97,7 @@
               { value: 'inquiry', label: '기타 문의' }
             ].each do |option| %>
               <label class="flex items-center">
-                <%= form.radio_button :translation_type, option[:value], class: "mr-2 text-[#E86A33] focus:ring-[#E86A33]" %>
+                <%= form.radio_button :translation_type, option[:value], required: true, class: "mr-2 text-[#E86A33] focus:ring-[#E86A33]" %>
                 <span class="text-sm text-[#4A403A]"><%= option[:label] %></span>
               </label>
             <% end %>
