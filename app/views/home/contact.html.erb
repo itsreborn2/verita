@@ -278,8 +278,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const submitButton = document.getElementById('submit_button');
   
   if (form && submitButton) {
-    form.addEventListener('submit', function(event) {
-      // 폼 제출 전에 버튼 상태 변경
+    // Turbo Drive 환경에서 폼 제출 시작 시 로딩 상태 표시
+    form.addEventListener('turbo:submit-start', function(event) {
       showLoadingState();
     });
   }
