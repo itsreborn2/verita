@@ -29,8 +29,8 @@
       <div class="info-row <%= 'urgent' if @translation_type == 'urgent' %>">
         <span class="label">번역 유형:</span>
         <%= case @translation_type
-            when 'general' then '일반 번역 (3시간 이내 납품)'
-            when 'urgent' then '긴급 번역 (1시간 이내 납품)'
+            when 'general' then '일반 번역 (1일 이내 납품)'
+            when 'urgent' then '긴급 번역 (3시간 이내 납품)'
             else '문의 (번역 관련 상담)'
             end %>
       </div>

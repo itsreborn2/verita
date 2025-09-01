@@ -44,7 +44,7 @@
 
     <!-- 번역 요청 폼 -->
     <div class="bg-[#F5EFE6] p-0 mt-10 md:mt-12">
-      <%= form_with url: send_translation_request_path, method: :post, multipart: true, local: true, class: "space-y-4", id: "translation_form" do |form| %>
+      <%= form_with url: send_translation_request_path, method: :post, multipart: true, data: { turbo: true }, class: "space-y-4", id: "translation_form" do |form| %>
 
         <!-- 이름 -->
         <div>
@@ -99,6 +99,12 @@
               <label class="flex items-center">
                 <%= form.radio_button :translation_type, option[:value], required: true, class: "mr-2 text-[#E86A33] focus:ring-[#E86A33]" %>
                 <span class="text-sm text-[#4A403A]"><%= option[:label] %></span>
+                <%# 납기 표기: 일반/거절이유 통지서 → (1일 이내 납품), 긴급 번역 → (3시간 이내 납품) %>
+                <% if option[:value] == 'urgent' %>
+                  <span class="ml-2 text-xs text-gray-500">(3시간 이내 납품)</span>
+                <% elsif ['general', 'rejection_notice'].include?(option[:value]) %>
+                  <span class="ml-2 text-xs text-gray-500">(1일 이내 납품)</span>
+                <% end %>
               </label>
             <% end %>
           </div>
@@ -139,6 +145,16 @@
               class: "w-full px-4 py-2 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-1 focus:ring-[#E86A33] focus:border-[#E86A33]",
               placeholder: "요청사항을 적어주세요.",
               required: true %>
+        </div>
+
+        <!-- 개인정보 수집 동의 -->
+        <div class="pt-2">
+          <div class="flex items-center">
+            <%= form.check_box :privacy_consent, { required: true, class: "h-4 w-4 rounded border-gray-300 text-[#E86A33] focus:ring-[#E86A33]" }, "true", "false" %>
+            <%= form.label :privacy_consent, class: "ml-2 block text-sm text-gray-900" do %>
+              <a href="<%= privacy_path %>" target="_blank" class="underline hover:text-[#E86A33]">개인정보처리방침</a>에 동의합니다. <span class="text-red-500">*</span>
+            <% end %>
+          </div>
         </div>
 
         <!-- 발송 버튼 -->
@@ -273,15 +289,47 @@ function showLoadingState() {
 }
 
 // 페이지 로드 완료 후 이벤트 리스너 추가
-document.addEventListener('DOMContentLoaded', function() {
+// 초기화 함수: Turbo/일반 로딩 모두에서 바인딩
+function initContactForm() {
   const form = document.getElementById('translation_form');
   const submitButton = document.getElementById('submit_button');
-  
-  if (form && submitButton) {
-    // Turbo Drive 환경에서 폼 제출 시작 시 로딩 상태 표시
-    form.addEventListener('turbo:submit-start', function(event) {
-      showLoadingState();
-    });
-  }
-});
+  const consentCheckbox = document.getElementById('privacy_consent');
+
+  if (!form || !submitButton || !consentCheckbox) return;
+
+  // 제출 버튼 상태를 업데이트하는 함수
+  const updateSubmitButtonState = () => {
+    if (consentCheckbox.checked) {
+      submitButton.disabled = false;
+      submitButton.style.opacity = '1';
+      submitButton.style.cursor = 'pointer';
+    } else {
+      submitButton.disabled = true;
+      submitButton.style.opacity = '0.5';
+      submitButton.style.cursor = 'not-allowed';
+    }
+  };
+
+  // 체크박스에 이벤트 리스너 추가
+  consentCheckbox.addEventListener('change', updateSubmitButtonState);
+
+  // 폼 제출 시 로딩 상태 표시
+  form.addEventListener('turbo:submit-start', showLoadingState);
+  form.addEventListener('submit', (event) => {
+    // 동의하지 않은 경우 제출 막기
+    if (!consentCheckbox.checked) {
+      event.preventDefault();
+      alert('개인정보처리방침에 동의해야 문의를 제출할 수 있습니다.');
+      return;
+    }
+    showLoadingState();
+  });
+
+  // 초기 버튼 상태 설정
+  updateSubmitButtonState();
+}
+
+// 페이지 초기화: Turbo Drive와 일반 로드 모두 지원
+document.addEventListener('turbo:load', initContactForm);
+document.addEventListener('DOMContentLoaded', initContactForm);
 </script>

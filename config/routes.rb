@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   # 추가 페이지들 (향후 확장)
   get "pricing", to: "home#pricing"     # 가격 정책 페이지
   get "contact", to: "home#contact"     # 번역 요청 폼 페이지
-  post "send_translation_request", to: "home#send_translation_request"  # 번역 요청 메일 발송
+  post 'send_translation_request', to: 'home#send_translation_request'
+
+  # 이용약관 및 개인정보처리방침 페이지
+  get 'terms', to: 'home#terms'
+  get 'privacy', to: 'home#privacy'
   # get "about", to: "home#about"       # 회사 소개 페이지
 end

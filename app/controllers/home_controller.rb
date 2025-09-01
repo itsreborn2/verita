@@ -68,12 +68,12 @@ class HomeController < ApplicationController
         popular: false,
         # Free 플랜 카드 표기 문구 (요청에 따라 업데이트)
         # - 첫 100페이지
-        # - 3시간 이내 납품
+        # - 1일 이내 납품
         # - 소진된 무료 페이지 수가 넘어가면 추가 결제 후 계속 사용 가능.
         # - 무제한 수정.
         features: [
           "첫 100페이지",
-          "3시간 이내 납품",
+          "1일 이내 납품",
           "소진된 무료 페이지 수가 넘어가면 추가 결제 후 계속 사용 가능.",
           "무제한 수정."
         ],
@@ -83,15 +83,15 @@ class HomeController < ApplicationController
       {
         # 일반 유료 번역 플랜 (기존 Premium 플랜 리네이밍)
         name: "일반 번역",
-        # 가격 표기: 9,900원 / 1페이지(400단어)
+        # 가격 표기: 9,900원 / 1페이지(300단어)
         price: "9,900원",
-        period: "/1페이지(400단어)",
+        period: "/1페이지(300단어)",
         # 추천 배지 비노출을 위해 popular 비활성화
         popular: false,
         # 혜택 문구: 요청 사항 반영
         features: [
           "첫 결제액 만큼 무료 제공 1+1",
-          "3시간 이내 납품(우선 처리)",
+          "1일 이내 납품(우선 처리)",
           "무제한 수정."
         ],
         cta_text: "시작하기",
@@ -101,10 +101,10 @@ class HomeController < ApplicationController
         # 긴급 번역 플랜 (기존 Enterprise 플랜 리네이밍)
         name: "긴급 번역",
         price: "15,000원",
-        period: "/1페이지(400단어)",
+        period: "/1페이지(300단어)",
         popular: false,
         features: [
-          "1시간 이내 납품(최우선 처리)",
+          "3시간 이내 납품(최우선 처리)",
           "무제한 수정."
         ],
         cta_text: "문의하기",
@@ -126,11 +126,11 @@ class HomeController < ApplicationController
         popular: false,
         # Free 플랜 카드 표기 문구 (요청에 따라 업데이트)
         # - 첫 100페이지
-        # - 3시간 이내 납품
+        # - 1일 이내 납품
         # - 무제한 수정.
         features: [
           "첫 100페이지",
-          "3시간 이내 납품",
+          "1일 이내 납품",
           "무제한 수정."
         ],
         cta_text: "시작하기",
@@ -144,7 +144,7 @@ class HomeController < ApplicationController
         popular: false,
         features: [
           "첫 결제액 만큼 1+1무료 제공",
-          "3시간 이내 납품(우선 처리)",
+          "1일 이내 납품(우선 처리)",
           "무제한 수정."
         ],
         cta_text: "시작하기",
@@ -157,7 +157,7 @@ class HomeController < ApplicationController
         period: "/1페이지",
         popular: false,
         features: [
-          "1시간 이내 납품(최우선 처리)",
+          "3시간 이내 납품(최우선 처리)",
           "긴급 유선 대응",
           "무제한 수정."
         ],
@@ -212,8 +212,8 @@ class HomeController < ApplicationController
     # 번역 요청 폼 페이지 렌더링
     # 번역 유형: 일반 번역, 긴급 번역, 문의
     @translation_types = [
-      { value: 'general', label: '일반 번역', description: '3시간 이내 납품' },
-      { value: 'urgent', label: '긴급 번역', description: '1시간 이내 납품 (발송 후 10분 이내 연락)' },
+      { value: 'general', label: '일반 번역', description: '1일 이내 납품' },
+      { value: 'urgent', label: '긴급 번역', description: '3시간 이내 납품 (발송 후 10분 이내 연락)' },
       { value: 'inquiry', label: '문의', description: '번역 관련 상담 및 문의' }
     ]
   end
@@ -270,14 +270,15 @@ class HomeController < ApplicationController
         end
 
         # 2025-08-21: 사용자 요청에 따른 성공 메시지 문구 변경 (한 줄 바꿈 포함)
-        flash[:success] = "요청이 발송 되었습니다.\n일반, 거래이유 통지서 번역은 3시간 이내 납품 처리되며, 긴급 번역은 번역이 시작되는 즉시 확인 안내 유선 연락을 드리겠습니다."
+        # 2025-09-01: 납품 시간 정책 업데이트 반영 (일반/거통지: 1일 이내, 긴급: 3시간 이내)
+        flash[:success] = "요청이 발송 되었습니다.\n일반, 거래이유 통지서 번역은 1일 이내 납품 처리되며, 긴급 번역은 번역이 시작되는 즉시 확인 안내 유선 연락을 드리겠습니다."
       rescue Net::ReadTimeout => e
         # 2025-08-21: SMTP ReadTimeout은 네트워크/서버 응답 지연으로 발생할 수 있으며,
         #   실제 SMTP 서버에서 발송이 진행되어 수신되는 경우가 있습니다.
         #   사용자 경험을 위해 성공 안내를 표시하되, 내부에는 경고 로그를 남깁니다.
         Rails.logger.warn "Translation request email timed out (read timeout), delivery may still succeed: #{e.message}"
         # ReadTimeout 상황에서도 사용자 경험을 위해 동일한 성공 안내 문구 사용
-        flash[:success] = "요청이 발송 되었습니다.\n일반, 거래이유 통지서 번역은 3시간 이내 납품 처리되며, 긴급 번역은 번역이 시작되는 즉시 확인 안내 유선 연락을 드리겠습니다."
+        flash[:success] = "요청이 발송 되었습니다.\n일반, 거래이유 통지서 번역은 1일 이내 납품 처리되며, 긴급 번역은 번역이 시작되는 즉시 확인 안내 유선 연락을 드리겠습니다."
       rescue => e
         # 기타 예외는 기존과 동일하게 오류로 안내합니다. (리턴값/플로우 변경 없음)
         Rails.logger.error "Translation request email failed: #{e.message}"
@@ -286,5 +287,15 @@ class HomeController < ApplicationController
 
       redirect_to contact_path
     end
+  end
+
+  # 이용약관 페이지
+  # GET /terms
+  def terms
+  end
+
+  # 개인정보처리방침 페이지
+  # GET /privacy
+  def privacy
   end
 end
