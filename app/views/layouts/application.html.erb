@@ -13,11 +13,18 @@
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
-    <%= favicon_link_tag 'veritaai_Favicon.ico', skip_pipeline: true %>
+    <%= favicon_link_tag '/veritaai_Favicon.ico' %>
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%# Tailwind v4 컴파일 산출물 명시 포함
+        - 배경: 로컬 개발 환경에서 md:inline-block 등 반응형 유틸리티가 누락되어 Pricing 링크가 숨김 상태로 유지되는 이슈가 발생함
+        - 조치: app/assets/builds/tailwind.css를 먼저 로드하여 Tailwind 유틸리티를 확실히 적용
+        - 주의: 이후 로드되는 :app 내 스타일(application.css 등)이 Tailwind 위에 오므로 커스텀 오버라이드도 정상 동작 %>
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+
+    <%# 커스텀 전역 스타일만 명시 포함: application.css
+        - :app 전체 번들은 application.tailwind.css까지 포함되어 중복 유틸리티(.hidden)가 md 변형을 덮어쓰는 문제가 생김
+        - 따라서 application.css만 로드하여 애니메이션/커스텀 규칙을 적용하고, Tailwind 유틸리티는 위에서 로드한 tailwind.css 하나로 일원화 %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
     <%= javascript_importmap_tags %>
   </head>

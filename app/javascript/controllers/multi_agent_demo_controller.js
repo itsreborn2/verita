@@ -153,32 +153,37 @@ export default class extends Controller {
   }
   
   highlightComparison() {
+    // CSS 선택자에서 특수 문자를 이스케이프하는 헬퍼 함수
+    const escapeCssSelector = (selector) => selector.replace(/([!"#$%&'()*+,./:;<=>?@[\]^`{|}~])/g, "\\$1");
+
     // 핵심 차이점 섹션 강조
-    const comparisonBox = this.element.querySelector('[class*="border-[#E86A33]"]');
+    const comparisonSelector = `[class*="${escapeCssSelector('border-[#E86A33]')}"]`;
+    const comparisonBox = this.element.querySelector(comparisonSelector);
 
     if (comparisonBox) {
       // 부드러운 강조 효과
-      comparisonBox.style.transition = 'all 0.8s ease'
-      comparisonBox.style.transform = 'scale(1.02)'
-      comparisonBox.style.boxShadow = '0 8px 25px rgba(232, 106, 51, 0.15)'
+      comparisonBox.style.transition = 'all 0.8s ease';
+      comparisonBox.style.transform = 'scale(1.02)';
+      comparisonBox.style.boxShadow = '0 8px 25px rgba(232, 106, 51, 0.15)';
       
       // 잠시 후 원래 상태로 복원
       setTimeout(() => {
-        comparisonBox.style.transform = 'scale(1)'
-        comparisonBox.style.boxShadow = 'none'
-      }, 1500)
+        comparisonBox.style.transform = 'scale(1)';
+        comparisonBox.style.boxShadow = 'none';
+      }, 1500);
     }
     
     // 기술적 우위 섹션 강조
-    const techAdvantageBox = this.element.querySelector('[class*="from-[#E86A33]"]');
+    const techAdvantageSelector = `[class*="${escapeCssSelector('from-[#E86A33]')}"]`;
+    const techAdvantageBox = this.element.querySelector(techAdvantageSelector);
     
     if (techAdvantageBox) {
-      techAdvantageBox.style.transition = 'all 0.8s ease'
-      techAdvantageBox.style.transform = 'scale(1.01)'
+      techAdvantageBox.style.transition = 'all 0.8s ease';
+      techAdvantageBox.style.transform = 'scale(1.01)';
       
       setTimeout(() => {
-        techAdvantageBox.style.transform = 'scale(1)'
-      }, 2000)
+        techAdvantageBox.style.transform = 'scale(1)';
+      }, 2000);
     }
   }
   
