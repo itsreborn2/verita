@@ -29,8 +29,9 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="h-full flex flex-col">
-    <main class="flex-grow">
+  <body class="h-full flex flex-col bg-[#F5EFE6] text-[#4A403A]">
+    <!-- 사이트 공통 배경색을 main에 적용하여 콘텐츠가 짧을 때도 푸터 위 공백이 흰색으로 보이지 않도록 처리 -->
+    <main class="flex-grow bg-[#F5EFE6] text-[#4A403A]">
       <%= yield %>
     </main>
     <%= render 'layouts/footer' %>

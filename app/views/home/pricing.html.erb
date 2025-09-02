@@ -65,6 +65,7 @@
       </div>
 
       <!-- 가격 카드: @pricing_plans 기반 동적 렌더링 -->
+      <!-- 카드 그리드: 하단 마진 제거(간격은 CTA의 상단 마진으로만 관리) -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <% @pricing_plans.each do |plan| %>
           <% popular = plan[:popular] %>
@@ -90,7 +91,8 @@
       </div>
 
       <!-- 통합 CTA 섹션 -->
-      <div class="mt-16 mb-16 text-center">
+      <!-- CTA: 상단 마진으로만 간격 관리, 기존 대비 소폭 증가 (mt-20 = 5rem) -->
+      <div class="mt-20 mb-16 text-center">
         <div class="max-w-2xl mx-auto">
           <!-- 제목 위 여백을 소폭 추가하여 시각적 호흡 확보 (mt-2) -->
           <h3 class="text-2xl font-bold text-gray-900 mb-4 mt-2">각종 문의 사항이나 번역을 요청하세요</h3>
